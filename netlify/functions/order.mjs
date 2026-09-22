@@ -44,7 +44,8 @@ export default async (req) => {
   const text =
     "Новая заявка с сайта\n" +
     "Имя: " + name + "\n" +
-    "Контакт: " + contact +
+    "Телефон: " + contact +
+    (d.tg ? "\nTelegram: " + clip(d.tg, 32) : "") +
     (d.link ? "\nСсылка на модельку: " + clip(d.link) : "") +
     (d.desc ? "\nЗадача: " + clip(d.desc) : "") +
     (d.model ? "\nМодель из калькулятора: " + clip(d.model) : "");
