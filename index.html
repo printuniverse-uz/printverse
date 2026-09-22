@@ -265,9 +265,62 @@ footer a{color:#fff;text-decoration:none}
 .shop-card h3{font-size:20px}
 .shop-card p{color:var(--mut);font-size:14.5px;flex:1}
 .shop-card .btn{margin-top:26px;justify-content:center}
+
+/* ── прелоадер: принтер печатает фигурку (1 раз в день) ── */
+#splash{position:fixed;inset:0;z-index:9999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;animation:splashOut .3s ease 1.2s forwards}
+#splash.splash-skip{display:none!important}
+.splash-tag{color:#103349;font-size:14px;font-weight:600;letter-spacing:.02em}
+.splash-bar{position:absolute;left:0;bottom:0;height:3px;width:0;background:#2C8DC9;animation:barFill 1.22s cubic-bezier(.2,.6,.3,1) forwards}
+.nozzle{animation:nozzleMove 1.3s ease-in-out infinite}
+.ext{animation:extBlink .5s ease-in-out infinite}
+.preveal{transform:scaleY(0);transform-box:fill-box;transform-origin:50% 100%;animation:revealIn 1s ease-out .15s forwards}
+@keyframes revealIn{to{transform:scaleY(1)}}
+@keyframes nozzleMove{0%,100%{transform:translateX(-16px)}50%{transform:translateX(16px)}}
+@keyframes extBlink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes barFill{from{width:0}to{width:100%}}
+@keyframes splashOut{to{opacity:0;visibility:hidden}}
+@media (prefers-reduced-motion: reduce){#splash{display:none}}
 </style>
 </head>
 <body>
+<div id="splash">
+  <svg width="150" height="130" viewBox="0 0 120 110" fill="none" aria-hidden="true">
+    <path d="M14 22H106" stroke="#103349" stroke-width="3" stroke-linecap="round"/>
+    <path d="M22 22V88M98 22V88" stroke="#103349" stroke-width="3" stroke-linecap="round"/>
+    <path d="M12 96H108" stroke="#103349" stroke-width="3" stroke-linecap="round"/>
+    <g class="nozzle">
+      <rect x="53" y="15" width="14" height="10" rx="2.5" fill="#103349"/>
+      <path d="M56.5 25h7l-3.5 5.5z" fill="#103349"/>
+      <path class="ext" d="M60 32v3" stroke="#2C8DC9" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <!-- ═══ СЕЗОННАЯ ФИГУРКА ПРЕЛОАДЕРРА (сейчас: тыква на Хэллоуин) ═══
+         Фигурка появляется «печатью» снизу вверх — эффект задаёт clipPath ниже.
+         Смена сезона: замените содержимое группы #splashFig. Цвета — только
+         фирменные: #103349 (тёмный), #2C8DC9 (акцент), белый. Новую сезонную
+         фигурку (ёлка, сердце, звезда…) можно попросить нарисовать агента —
+         вставит сюда в том же стиле. -->
+    <defs>
+      <clipPath id="pClip"><rect class="preveal" x="0" y="10" width="120" height="100"/></clipPath>
+    </defs>
+    <g id="splashFig" clip-path="url(#pClip)">
+      <path d="M56.5 62C56.5 54 58.5 50 63.5 47L66.5 50C62 53 61.5 56 61.5 62Z" fill="#103349"/>
+      <ellipse cx="38" cy="81" rx="7.5" ry="11" fill="#2C8DC9"/>
+      <ellipse cx="82" cy="81" rx="7.5" ry="11" fill="#2C8DC9"/>
+      <ellipse cx="46" cy="79.5" rx="12" ry="13.5" fill="#2C8DC9"/>
+      <ellipse cx="74" cy="79.5" rx="12" ry="13.5" fill="#2C8DC9"/>
+      <ellipse cx="60" cy="79" rx="16" ry="16.5" fill="#2C8DC9" stroke="#fff" stroke-width="2"/>
+      <polygon points="44,77.5 53,77.5 48.5,70.5" fill="#fff"/>
+      <polygon points="67,77.5 76,77.5 71.5,70.5" fill="#fff"/>
+      <polygon points="57,82.5 63,82.5 60,77.5" fill="#fff"/>
+      <path d="M42 85H78L73 92H47Z" fill="#fff"/>
+      <rect x="48" y="85" width="4" height="3.6" fill="#2C8DC9"/>
+      <rect x="68" y="85" width="4" height="3.6" fill="#2C8DC9"/>
+    </g>
+  </svg>
+  <p class="splash-tag" data-i18n="splash.tag">Печатаем сайт…</p>
+  <div class="splash-bar"></div>
+</div>
+<script>try{if(localStorage.getItem('pu-splash-day')===new Date().toDateString()){document.getElementById('splash').classList.add('splash-skip')}}catch(e){}</script>
 <!-- ЗАМЕНИТЕ перед публикацией: цены и материалы в блоке CONFIG внизу файла
      (сейчас — образец). Политика конфиденциальности: страница privacy.html уже
      готова и лежит рядом. Для og:image в соцсетях загрузите logo.png на хостинг
@@ -473,14 +526,14 @@ footer a{color:#fff;text-decoration:none}
     <span data-i18n-html="foot.brand"><span>© 2026 <b>PrintUniverse</b> — студия 3D-печати · <span class="mono">printverse.uz · Ташкент</span></span></span>
     <span class="soc">
       <a href="tel:+998777374320"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+998 77 737-43-20</a>
-      <a href="mailto:printuniverse.box@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>printuniverse.box@gmail.com</a>
+      <a href="/cdn-cgi/l/email-protection#2e5e5c47405a5b4047584b5c5d4b004c41566e49434f4742004d4143"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><span class="__cf_email__" data-cfemail="abdbd9c2c5dfdec5c2ddced9d8ce85c9c4d3ebccc6cac2c785c8c4c6">[email&#160;protected]</span></a>
       <a href="https://www.instagram.com/printuniverse_uz" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>Instagram</a>
       <a href="https://t.me/printuniverse" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.1 18.6 19.3c-.25 1.1-.9 1.37-1.83.85l-5.05-3.72-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.14 9.36-8.46c.4-.36-.09-.56-.63-.2L5.87 12.87.9 11.31c-1.08-.34-1.1-1.08.22-1.6L20.5 3.02c.9-.33 1.69.2 1.4 1.08z"/></svg>Telegram</a>
     </span>
   </div>
 </footer>
 
-<script type="importmap">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="importmap">
 {"imports":{
   "three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
   "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
@@ -795,6 +848,7 @@ ru: {
   'stats.vol': 'объём {v} см³', 'stats.big': ' · крупнее стола — печатаем по частям',
   'err.read': 'не удалось прочитать файл — проверьте его', 'err.fmt': 'формат не поддерживается — STL, OBJ или 3MF',
   'form.sent': 'Заявка отправлена — мы свяжемся с вами в ближайшее время.',
+  'splash.tag': 'Печатаем сайт…',
   'form.fallback': 'Не удалось отправить автоматически — текст заявки скопирован, отправьте его нам в <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener">Telegram</a>.',
   'shop.eyebrow': 'Готовые модельки', 'shop.h2': 'Готовые модельки на Uzum',
   'shop.p': 'Печатаем коллекции авторов, с которыми сотрудничаем официально: покупаем коммерческую лицензию, печатаем, рекламируем и продаём готовые изделия на маркетплейсе Uzum.',
@@ -860,6 +914,7 @@ uz: {
   'stats.vol': 'hajm {v} sm³', 'stats.big': ' · stoldan katta — qismlarga chop etamiz',
   'err.read': 'faylni o‘qib bo‘lmadi — tekshiring', 'err.fmt': 'format qo‘llanmaydi — STL, OBJ yoki 3MF',
   'form.sent': 'Ariza yuborildi — tez orada siz bilan bog\'lanamiz.',
+  'splash.tag': 'Saytni chop etamiz…',
   'form.fallback': 'Avtomatik yuborib bo\'lmadi — ariza matni nusxalandi, uni bizga <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener">Telegram</a> orqali yuboring.',
   'shop.eyebrow': 'Tayyor modellalar', 'shop.h2': 'Uzum’da tayyor modellalar',
   'shop.p': 'Rasmiy hamkorlik qiladigan mualliflar kolleksiyalarini chop etamiz: tijorat litsenziyasini sotib olamiz, chop etamiz, reklama qilamiz va tayyor mahsulotlarni Uzum marketpleysida sotamiz.',
@@ -925,6 +980,7 @@ en: {
   'stats.vol': 'volume {v} cm³', 'stats.big': ' · larger than the bed — printed in parts',
   'err.read': 'could not read the file — please check it', 'err.fmt': 'format not supported — STL, OBJ or 3MF',
   'form.sent': 'Request sent — we will get back to you shortly.',
+  'splash.tag': 'Printing the site…',
   'form.fallback': 'Auto-send failed — your request text was copied, please send it to us via <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener">Telegram</a>.',
   'shop.eyebrow': 'Ready-made models', 'shop.h2': 'Ready-made models on Uzum',
   'shop.p': 'We print collections by authors we officially work with: we buy a commercial license, print, promote and sell the finished items on the Uzum marketplace.',
@@ -976,7 +1032,13 @@ document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click
   let s = null; try{ s = localStorage.getItem('pu-lang'); }catch(e){}
   applyLang(s && I18N[s] ? s : 'ru');
 })();
-
+(function(){
+  const sp = document.getElementById('splash');
+  if (!sp) return;
+  try{ localStorage.setItem('pu-splash-day', new Date().toDateString()); }catch(e){}
+  setTimeout(() => sp.remove(), 1900);
+})();
 </script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
