@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/netlify/*"
+  to = "/"
+  status = 301
+  force = true
