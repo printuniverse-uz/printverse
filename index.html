@@ -280,6 +280,11 @@ footer a{color:#fff;text-decoration:none}
 @keyframes barFill{from{width:0}to{width:100%}}
 @keyframes splashOut{to{opacity:0;visibility:hidden}}
 @media (prefers-reduced-motion: reduce){#splash{display:none}}
+
+/* ── телефон: закреплённый префикс +998 ── */
+.tel-field{position:relative}
+.tel-field input{padding-left:72px}
+.tel-prefix{position:absolute;left:16px;top:0;height:100%;display:flex;align-items:center;color:var(--ink);font-weight:700;pointer-events:none;user-select:none}
 </style>
 </head>
 <body>
@@ -506,7 +511,7 @@ footer a{color:#fff;text-decoration:none}
       <!-- Форма отправляется в Telegram-бот через Netlify Function (netlify/functions/order.mjs) -->
       <form class="form" id="orderForm">
         <input type="text" id="fName" data-i18n-ph="ph.name" placeholder="Как к вам обращаться" required>
-        <input type="tel" id="fContact" data-i18n-ph="ph.contact" placeholder="Телефон — +998 (90) 123 45 67" required inputmode="tel" autocomplete="tel">
+        <div class="tel-field"><span class="tel-prefix" aria-hidden="true">+998</span><input type="tel" id="fContact" data-i18n-ph="ph.contact" placeholder="(90) 123 45 67" required inputmode="tel" autocomplete="tel"></div>
         <input type="text" id="fTg" data-i18n-ph="ph.tg" placeholder="Telegram — @username (необязательно)" autocomplete="off" spellcheck="false">
         <input type="url" id="fLink" data-i18n-ph="ph.link" placeholder="Ссылка на модельку — MakerWorld, Cults3D, Printables…">
         <textarea id="fDesc" data-i18n-ph="ph.desc" placeholder="Размер, цвет, материал, количество — или задайте вопрос"></textarea>
@@ -794,7 +799,7 @@ document.getElementById('orderForm').addEventListener('submit', async e => {
   const btn = e.target.querySelector('button[type="submit"]');
   const status = document.getElementById('formStatus');
   const bad = k => { status.innerHTML = '<span style="color:#D64545">' + t(k) + '</span>'; };
-  if (!/^\+998 \(\d{2}\) \d{3} \d{2} \d{2}$/.test(fContact.value.trim())) {
+  if (!/^\(\d{2}\) \d{3} \d{2} \d{2}$/.test(fContact.value.trim())) {
     bad('form.phoneBad'); fContact.focus(); return;
   }
   const tg = fTg.value.trim();
@@ -802,7 +807,7 @@ document.getElementById('orderForm').addEventListener('submit', async e => {
     bad('form.tgBad'); fTg.focus(); return;
   }
   const model = state.modelName ? `${state.modelName} (${state.mat}, заполнение ${state.fill}%)` : '';
-  const txt = `Заявка с сайта\nИмя: ${fName.value}\nТелефон: ${fContact.value.trim()}` +
+  const txt = `Заявка с сайта\nИмя: ${fName.value}\nТелефон: +998 ${fContact.value.trim()}` +
     (tg ? `\nTelegram: ${tg}` : '') +
     `\nСсылка на модельку: ${fLink.value || '—'}\nЗадача: ${fDesc.value}` +
     (model ? `\nМодель в калькуляторе: ${model}` : '');
@@ -811,7 +816,7 @@ document.getElementById('orderForm').addEventListener('submit', async e => {
     const r = await fetch('/api/order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: fName.value, contact: fContact.value.trim(), tg, link: fLink.value, desc: fDesc.value, model,
+      body: JSON.stringify({ name: fName.value, contact: '+998 ' + fContact.value.trim(), tg, link: fLink.value, desc: fDesc.value, model,
         company: document.getElementById('fCompany')?.value || '' })
     });
     if (r.ok) { status.innerHTML = t('form.sent'); return; }
@@ -820,18 +825,25 @@ document.getElementById('orderForm').addEventListener('submit', async e => {
   status.innerHTML = t('form.fallback');
   if (btn) btn.disabled = false;
 });
-/* ── маска телефона: всегда +998 (xx) xxx xx xx ── */
-document.getElementById('fContact').addEventListener('input', e => {
-  let d = e.target.value.replace(/\D/g, '');
-  if (d.startsWith('998')) d = d.slice(3);
-  d = d.slice(0, 9);
-  let out = '+998';
-  if (d.length) out += ' (' + d.slice(0, 2);
+/* ── маска телефона: +998 закреплён, вводим (xx) xxx xx xx; backspace всегда стирает ── */
+const telEl = document.getElementById('fContact');
+const fmtTel = d => {
+  let out = '';
+  if (d.length) out += '(' + d.slice(0, 2);
   if (d.length >= 2) out += ')';
   if (d.length > 2) out += ' ' + d.slice(2, 5);
   if (d.length > 5) out += ' ' + d.slice(5, 7);
   if (d.length > 7) out += ' ' + d.slice(7, 9);
-  e.target.value = out;
+  return out;
+};
+telEl.addEventListener('input', () => {
+  let d = telEl.value.replace(/\D/g, '');
+  if (d.length > 9 && d.startsWith('998')) d = d.slice(3);   // вставили номер вместе с 998
+  if (telEl._d && d.length === telEl._d.length && telEl.value.length < telEl._len) d = d.slice(0, -1); // стёрли разделитель — сносим цифру
+  d = d.slice(0, 9);
+  telEl._d = d; telEl._len = telEl.value.length;
+  telEl.value = fmtTel(d);
+  telEl.setSelectionRange(telEl.value.length, telEl.value.length);
 });
 document.getElementById('fTg').addEventListener('input', e => {
   let v = e.target.value.replace(/\s+/g, '');
@@ -903,7 +915,7 @@ ru: {
   'faq.a8': 'Самовывоз в Ташкенте или доставка по Узбекистану. Перед отправкой пришлём фото готовой модельки и упаковки.',
   'order.eyebrow': 'Заявка', 'order.h2': 'Обсудим вашу модельку',
   'order.p': 'Пришлите ссылку на модельку, размер, цвет и материал — ответим с ценой и сроком, обычно в течение часа. Быстрее всего пишите сразу в <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener" style="color:#7cc4ea">Telegram</a> или <a href="https://www.instagram.com/printuniverse_uz" target="_blank" rel="noopener" style="color:#7cc4ea">Instagram</a>.',
-  'ph.name': 'Как к вам обращаться', 'ph.contact': 'Телефон — +998 (90) 123 45 67', 'ph.tg': 'Telegram — @username (необязательно)', 'ph.link': 'Ссылка на модельку — MakerWorld, Cults3D, Printables…', 'ph.desc': 'Размер, цвет, материал, количество — или задайте вопрос',
+  'ph.name': 'Как к вам обращаться', 'ph.contact': '(90) 123 45 67', 'ph.tg': 'Telegram — @username (необязательно)', 'ph.link': 'Ссылка на модельку — MakerWorld, Cults3D, Printables…', 'ph.desc': 'Размер, цвет, материал, количество — или задайте вопрос',
   'order.submit': 'Отправить заявку',
   'order.note': 'Нажимая кнопку, вы соглашаетесь на обработку персональных данных. <a href="privacy.html">Политика конфиденциальности</a> (закон РУз «О персональных данных», ЗРУ-547 от 02.07.2019).',
   'foot.brand': '© 2026 <b>PrintUniverse</b> — студия 3D-печати · <span class="mono">printverse.uz · Ташкент</span>',
@@ -970,7 +982,7 @@ uz: {
   'faq.a8': 'Toshkentda o‘zib olish yoki O‘zbekiston bo‘ylab yetkazib berish. Yuborishdan oldin tayyor model va qadoq rasmlarini yuboramiz.',
   'order.eyebrow': 'Ariza', 'order.h2': 'Modelingizni muhokama qilamiz',
   'order.p': 'Model havolasini, o‘lcham, rang va materialni yuboring — narx va muddat bilan odatda bir soat ichida javob beramiz. Eng tez yo‘l: darhol <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener" style="color:#7cc4ea">Telegram</a> yoki <a href="https://www.instagram.com/printuniverse_uz" target="_blank" rel="noopener" style="color:#7cc4ea">Instagram</a> orqali yozing.',
-  'ph.name': 'Ismingiz', 'ph.contact': 'Telefon — +998 (90) 123 45 67', 'ph.tg': 'Telegram — @username (majburiy emas)', 'ph.link': 'Model havolasi — MakerWorld, Cults3D, Printables…', 'ph.desc': 'O‘lcham, rang, material, miqdor — yoki savol bering',
+  'ph.name': 'Ismingiz', 'ph.contact': '(90) 123 45 67', 'ph.tg': 'Telegram — @username (majburiy emas)', 'ph.link': 'Model havolasi — MakerWorld, Cults3D, Printables…', 'ph.desc': 'O‘lcham, rang, material, miqdor — yoki savol bering',
   'order.submit': 'Arizani yuborish',
   'order.note': 'Tugmani bosganingizda shaxsiy ma’lumotlarni qayta ishlashga rozilik bildirasiz. <a href="privacy.html">Maxfiylik siyosati</a> (O‘zR “Shaxsiy ma’lumotlar to‘g‘risida”gi qonuni, ZRU-547, 02.07.2019).',
   'foot.brand': '© 2026 <b>PrintUniverse</b> — 3D chop studiyasi · <span class="mono">printverse.uz · Toshkent</span>',
@@ -1037,7 +1049,7 @@ en: {
   'faq.a8': 'Pickup in Tashkent or delivery across Uzbekistan. Before shipping we send photos of the finished model and packaging.',
   'order.eyebrow': 'Request', 'order.h2': 'Let’s discuss your model',
   'order.p': 'Send a model link, size, color and material — we reply with the price and lead time, usually within an hour. The fastest way is to write straight to <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener" style="color:#7cc4ea">Telegram</a> or <a href="https://www.instagram.com/printuniverse_uz" target="_blank" rel="noopener" style="color:#7cc4ea">Instagram</a>.',
-  'ph.name': 'Your name', 'ph.contact': 'Phone — +998 (90) 123 45 67', 'ph.tg': 'Telegram — @username (optional)', 'ph.link': 'Model link — MakerWorld, Cults3D, Printables…', 'ph.desc': 'Size, color, material, quantity — or ask a question',
+  'ph.name': 'Your name', 'ph.contact': '(90) 123 45 67', 'ph.tg': 'Telegram — @username (optional)', 'ph.link': 'Model link — MakerWorld, Cults3D, Printables…', 'ph.desc': 'Size, color, material, quantity — or ask a question',
   'order.submit': 'Send request',
   'order.note': 'By clicking the button you consent to the processing of personal data. <a href="privacy.html">Privacy policy</a> (Law of Uzbekistan “On Personal Data”, ZRU-547 of 02.07.2019).',
   'foot.brand': '© 2026 <b>PrintUniverse</b> — 3D printing studio · <span class="mono">printverse.uz · Tashkent</span>',
