@@ -851,7 +851,6 @@ telEl.addEventListener('keydown', e => {         // стирание: явное
 telEl.addEventListener('input', () => {          // ввод и вставка (на Android backspace тоже приходит сюда)
   let d = telEl.value.replace(/\D/g, '');
   if (d.length > 9 && d.startsWith('998')) d = d.slice(3);   // вставили номер вместе с 998
-  if (d.length === telD.length && telEl.value.length < fmtTel(telD).length && d.length) d = d.slice(0, -1);
   telD = d.slice(0, 9);
   telRender();
 });
