@@ -825,7 +825,7 @@ document.getElementById('orderForm').addEventListener('submit', async e => {
   status.innerHTML = t('form.fallback');
   if (btn) btn.disabled = false;
 });
-/* ── маска телефона: +998 закреплён, вводим (xx) xxx xx xx; backspace всегда стирает ── */
+/* ── маска телефона: +998 закреплён, вводим (xx) xxx xx xx ── */
 const telEl = document.getElementById('fContact');
 const fmtTel = d => {
   let out = '';
@@ -836,14 +836,24 @@ const fmtTel = d => {
   if (d.length > 7) out += ' ' + d.slice(7, 9);
   return out;
 };
-telEl.addEventListener('input', () => {
+let telD = '';                                   // источник истины: 9 цифр
+const telRender = () => {
+  telEl.value = fmtTel(telD);
+  telEl.setSelectionRange(telEl.value.length, telEl.value.length);
+};
+telEl.addEventListener('keydown', e => {         // стирание: явное, без угадывания
+  if (e.key === 'Backspace' || e.key === 'Delete') {
+    e.preventDefault();
+    telD = telD.slice(0, -1);
+    telRender();
+  }
+});
+telEl.addEventListener('input', () => {          // ввод и вставка (на Android backspace тоже приходит сюда)
   let d = telEl.value.replace(/\D/g, '');
   if (d.length > 9 && d.startsWith('998')) d = d.slice(3);   // вставили номер вместе с 998
-  if (telEl._d && d.length === telEl._d.length && telEl.value.length < telEl._len) d = d.slice(0, -1); // стёрли разделитель — сносим цифру
-  d = d.slice(0, 9);
-  telEl._d = d; telEl._len = telEl.value.length;
-  telEl.value = fmtTel(d);
-  telEl.setSelectionRange(telEl.value.length, telEl.value.length);
+  if (d.length === telD.length && telEl.value.length < fmtTel(telD).length && d.length) d = d.slice(0, -1);
+  telD = d.slice(0, 9);
+  telRender();
 });
 document.getElementById('fTg').addEventListener('input', e => {
   let v = e.target.value.replace(/\s+/g, '');
