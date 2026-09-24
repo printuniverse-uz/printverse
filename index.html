@@ -179,7 +179,13 @@ footer a{color:#fff;text-decoration:none}
 .soc a{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:rgba(255,255,255,.85);transition:color .2s}
 .soc a:hover{color:#7cc4ea}
 .soc svg{width:15px;height:15px;flex:none}
-.lang{display:flex;gap:3px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:3px;flex:none}
+.langdd{position:relative;flex:none}
+.langdd-cur{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px;font-size:12px;font-weight:800;color:var(--brand);text-transform:uppercase;cursor:pointer}
+.langdd-menu{position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid var(--line);border-radius:10px;padding:4px;display:none;flex-direction:column;gap:2px;min-width:64px;box-shadow:0 8px 22px rgba(16,51,73,.12);z-index:60}
+.langdd.open .langdd-menu{display:flex}
+.langdd-menu button{border:0;background:transparent;border-radius:7px;padding:7px 10px;font-size:12px;font-weight:700;color:var(--mut);text-transform:uppercase;cursor:pointer;text-align:left;transition:.15s}
+.langdd-menu button:hover{background:var(--soft);color:var(--brand)}
+.langdd-menu button.on{background:var(--brand);color:#fff}
 .lang button{border:0;background:transparent;border-radius:7px;padding:5px 8px;font-size:12px;font-weight:700;color:var(--mut);text-transform:uppercase;cursor:pointer;transition:.2s}
 .lang button.on{background:var(--brand);color:#fff}
 
@@ -294,6 +300,10 @@ footer a{color:#fff;text-decoration:none}
 .use p{margin:0;font-size:13.5px;color:var(--mut);line-height:1.55}
 @media(max-width:960px){.uses{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.uses{grid-template-columns:1fr}}
+.uses-3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:960px){.uses-3{grid-template-columns:1fr}}
+.uses-divider{margin:34px 0;text-align:center;color:#8a99a5;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:14px}
+.uses-divider::before,.uses-divider::after{content:'';flex:1;height:1px;background:var(--line)}
 </style>
 </head>
 <body>
@@ -347,12 +357,16 @@ footer a{color:#fff;text-decoration:none}
     <nav>
       <a href="#how" data-i18n="nav.how">Как заказать</a>
       <a href="#calc" data-i18n="nav.calc">Калькулятор</a>
+      <a href="#uses" data-i18n="nav.about">О печати</a>
       <a href="#materials" data-i18n="nav.materials">Материалы</a>
       <a href="#shop" data-i18n="nav.shop">Готовые модельки</a>
       <a href="#faq" data-i18n="nav.faq">Вопросы</a>
     </nav>
-    <div class="lang" role="group" aria-label="Язык">
-      <button type="button" data-lang="ru" class="on">RU</button><button type="button" data-lang="uz">UZ</button><button type="button" data-lang="en">EN</button>
+    <div class="langdd" id="langDD">
+      <button type="button" class="langdd-cur" id="langCur" aria-haspopup="true" aria-expanded="false">RU</button>
+      <div class="langdd-menu" role="group" aria-label="Язык">
+        <button type="button" data-lang="ru">RU</button><button type="button" data-lang="uz">UZ</button><button type="button" data-lang="en">EN</button>
+      </div>
     </div>
     <a class="cta" href="#order" data-i18n="nav.cta">Оставить заявку</a>
     <button class="burger" id="burger" type="button" data-i18n-aria="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobileMenu">
@@ -362,6 +376,7 @@ footer a{color:#fff;text-decoration:none}
 <div class="mobile-menu" id="mobileMenu">
   <a href="#how" data-i18n="nav.how">Как заказать</a>
   <a href="#calc" data-i18n="nav.calc">Калькулятор</a>
+  <a href="#uses" data-i18n="nav.about">О печати</a>
   <a href="#materials" data-i18n="nav.materials">Материалы</a>
   <a href="#shop" data-i18n="nav.shop">Готовые модельки</a>
   <a href="#faq" data-i18n="nav.faq">Вопросы</a>
@@ -394,34 +409,56 @@ footer a{color:#fff;text-decoration:none}
     </div>
     <div class="uses">
       <div class="use">
-        <svg viewBox="0 0 120 84" width="72" height="50" fill="none" aria-hidden="true"><rect x="53" y="4" width="14" height="7" rx="3.5" fill="#103349"/><rect x="34" y="10" width="52" height="64" rx="9" fill="#2C8DC9"/><polygon points="60,26 63.3,35.2 73,35.5 65.4,41.6 68.2,51 60,45.4 51.8,51 54.6,41.6 47,35.5 56.7,35.2" fill="#fff"/></svg>
-        <h3 data-i18n="use.1t">Корпоративные элементы</h3>
-        <p data-i18n="use.1d">Брелоки, таблички и сувениры с вашим логотипом — для клиентов и команды.</p>
+        <svg viewBox="0 0 120 84" width="72" height="50" fill="none" aria-hidden="true"><path d="M46 12h28l-4 14c8 6 12 15 12 24 0 16-10 28-22 28S38 66 38 50c0-9 4-18 12-24l-4-14Z" fill="#2C8DC9"/><path d="M52 30c-3 5-4 9-4 13" stroke="#7CC4EA" stroke-width="4" stroke-linecap="round"/><path d="M40 12h40" stroke="#103349" stroke-width="6" stroke-linecap="round"/></svg>
+        <h3 data-i18n="use.1t">Декор</h3>
+        <p data-i18n="use.1d">Вазы, статуэтки, настенный декор и органайзеры для стола.</p>
       </div>
       <div class="use">
         <svg viewBox="0 0 120 84" width="72" height="50" fill="none" aria-hidden="true"><circle cx="42" cy="27" r="9" fill="#2C8DC9"/><circle cx="78" cy="27" r="9" fill="#2C8DC9"/><circle cx="60" cy="47" r="26" fill="#2C8DC9"/><ellipse cx="60" cy="55" rx="12" ry="9" fill="#fff"/><circle cx="60" cy="51" r="4" fill="#103349"/><circle cx="49" cy="41" r="3" fill="#103349"/><circle cx="71" cy="41" r="3" fill="#103349"/></svg>
-        <h3 data-i18n="use.2t">Игрушки для ребёнка</h3>
+        <h3 data-i18n="use.2t">Игрушки</h3>
         <p data-i18n="use.2d">Фигурки любимых героев и игрушки под интересы вашего ребёнка.</p>
       </div>
       <div class="use">
-        <svg viewBox="0 0 120 84" width="72" height="50" fill="none" aria-hidden="true"><rect x="36" y="10" width="48" height="10" rx="4" fill="#103349"/><circle cx="60" cy="16" r="4" fill="#7CC4EA"/><path d="M60 22v14a11 11 0 1 1-11 11" stroke="#2C8DC9" stroke-width="7" stroke-linecap="round" fill="none"/></svg>
-        <h3 data-i18n="use.3t">Мелочи для быта</h3>
-        <p data-i18n="use.3d">Крючок, крепёж, заглушка — нужны сегодня, а не через неделю поисков.</p>
+        <svg viewBox="0 0 120 84" width="72" height="50" fill="none" aria-hidden="true"><rect x="34" y="20" width="52" height="6" rx="3" fill="#2C8DC9"/><path d="M38 30v28a4 4 0 0 0 4 4h36a4 4 0 0 0 4-4V30" stroke="#103349" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M52 62v8h16v-8" stroke="#2C8DC9" stroke-width="6" fill="none" stroke-linecap="round"/><rect x="46" y="34" width="28" height="18" rx="3" fill="#7CC4EA"/></svg>
+        <h3 data-i18n="use.3t">Вещи для быта</h3>
+        <p data-i18n="use.3d">Крючок, крепёж, подставка — нужны сегодня, а не через неделю.</p>
       </div>
       <div class="use">
-        <svg viewBox="0 0 120 84" width="72" height="50" fill="none" aria-hidden="true"><path d="M60 10 84 22 60 34 36 22Z" fill="#7CC4EA"/><path d="M36 22v20l24 12V34Z" fill="#2C8DC9"/><path d="M84 22v20L60 54V34Z" fill="#103349"/><text x="60" y="78" text-anchor="middle" font-size="17" font-weight="800" fill="#103349" font-family="Manrope,sans-serif">× 1</text></svg>
-        <h3 data-i18n="use.4t">Не нужны тиражи</h3>
-        <p data-i18n="use.4d">От единственной штуки: печать выгодна даже для одного экземпляра.</p>
+        <svg viewBox="0 0 120 84" width="72" height="50" fill="none" aria-hidden="true"><circle cx="60" cy="34" r="13" stroke="#103349" stroke-width="5" fill="none"/><path d="M60 47v10M60 57l-14 9M60 57l14 9" stroke="#2C8DC9" stroke-width="5" stroke-linecap="round"/></svg>
+        <h3 data-i18n="use.4t">Аксессуары</h3>
+        <p data-i18n="use.4d">Брелоки, чехлы, ремешки и украшения под ваш стиль.</p>
+      </div>
+      <div class="use">
+        <svg viewBox="0 0 120 84" width="72" height="50" fill="none" aria-hidden="true"><path d="M20 34l80 10-3 17-80-10 3-17Z" fill="#103349"/><path d="M29 51l3 18M62 55l3 18" stroke="#2C8DC9" stroke-width="5" stroke-linecap="round"/><circle cx="94" cy="30" r="5" fill="#7CC4EA"/></svg>
+        <h3 data-i18n="use.5t">Реквизит</h3>
+        <p data-i18n="use.5d">Элементы костюмов и реквизит для косплееров и съёмок.</p>
+      </div>
+      <div class="use">
+        <svg viewBox="0 0 120 84" width="72" height="50" fill="none" aria-hidden="true"><rect x="53" y="4" width="14" height="7" rx="3.5" fill="#103349"/><rect x="34" y="10" width="52" height="64" rx="9" fill="#2C8DC9"/><polygon points="60,26 63.3,35.2 73,35.5 65.4,41.6 68.2,51 60,45.4 51.8,51 54.6,41.6 47,35.5 56.7,35.2" fill="#fff"/></svg>
+        <h3 data-i18n="use.6t">Корпоративные элементы</h3>
+        <p data-i18n="use.6d">Брелоки, таблички и сувениры с логотипом — для клиентов и команды.</p>
+      </div>
+    </div>
+    <div class="uses-divider" data-i18n="use.divider">и это не всё</div>
+    <div class="sec-head">
+      <div class="eyebrow" data-i18n="adv.eyebrow">Почему 3D-печать</div>
+      <h2 data-i18n="adv.h2">Преимущества печати</h2>
+    </div>
+    <div class="uses uses-3">
+      <div class="use">
+        <svg viewBox="0 0 120 84" width="72" height="50" fill="none" aria-hidden="true"><path d="M28 34l32-14 32 14-32 14-32-14Z" fill="#7CC4EA"/><path d="M28 34v22l32 14V48L28 34Z" fill="#2C8DC9"/><path d="M92 34v22L60 70V48l32-14Z" fill="#103349"/><path d="M60 48v22" stroke="#fff" stroke-width="2.5"/></svg>
+        <h3 data-i18n="adv.1t">Не нужны тиражи</h3>
+        <p data-i18n="adv.1d">От единственной штуки: печать выгодна даже для одного экземпляра.</p>
       </div>
       <div class="use">
         <svg viewBox="0 0 120 84" width="72" height="50" fill="none" aria-hidden="true"><circle cx="34" cy="42" r="15" fill="#103349" stroke="#fff" stroke-width="3"/><circle cx="52" cy="42" r="15" fill="#2C8DC9" stroke="#fff" stroke-width="3"/><circle cx="70" cy="42" r="15" fill="#7CC4EA" stroke="#fff" stroke-width="3"/><circle cx="88" cy="42" r="15" fill="#D6E9F6" stroke="#fff" stroke-width="3"/></svg>
-        <h3 data-i18n="use.5t">Десятки цветов</h3>
-        <p data-i18n="use.5d">От строгих графитов до ярких акцентов — под интерьер, бренд или вкус.</p>
+        <h3 data-i18n="adv.2t">Десятки цветов</h3>
+        <p data-i18n="adv.2d">От строгих графитов до ярких акцентов — под интерьер, бренд или вкус.</p>
       </div>
       <div class="use">
         <svg viewBox="0 0 120 84" width="72" height="50" fill="none" aria-hidden="true"><path d="M96 10c2.5-3.5 8-3.5 9 0 1-3.5 6.5-3.5 9 0 2 3-2 7-9 11-7-4-11-8-9-11Z" fill="#7CC4EA"/><rect x="28" y="30" width="64" height="12" rx="5" fill="#103349"/><rect x="32" y="42" width="56" height="34" rx="6" fill="#2C8DC9"/><rect x="55" y="30" width="10" height="46" fill="#fff" opacity=".85"/><circle cx="53" cy="28" r="5" fill="#7CC4EA"/><circle cx="67" cy="28" r="5" fill="#7CC4EA"/></svg>
-        <h3 data-i18n="use.6t">Кастомизация — подарок</h3>
-        <p data-i18n="use.6d">Инициалы, имя или узор на вещи — и она становится личным подарком.</p>
+        <h3 data-i18n="adv.3t">Кастомизация — подарок</h3>
+        <p data-i18n="adv.3d">Инициалы, имя или узор на вещи — и она становится личным подарком.</p>
       </div>
     </div>
   </div>
@@ -922,13 +959,17 @@ ru: {
   'hero.h1': '3D-печать под вашу задачу — <em>от сувенира до крепежа</em>',
   'hero.lead': 'Корпоративные сувениры, игрушки для ребёнка, срочные мелочи для дома — печатаем без тиражей, в десятках цветов. Добавим инициалы или имя — получится личный подарок.',
   'hero.btn1': 'Прислать модельку', 'hero.btn2': 'Как заказать',
-  'use.eyebrow': 'Знакомство с 3D-печатью', 'use.h2': 'Что можно напечатать', 'use.intro': '3D-печать закрывает очень разные задачи — от бизнеса до быта. Вот лишь несколько примеров.',
-  'use.1t': 'Корпоративные элементы', 'use.1d': 'Брелоки, таблички и сувениры с вашим логотипом — для клиентов и команды.',
-  'use.2t': 'Игрушки для ребёнка', 'use.2d': 'Фигурки любимых героев и игрушки под интересы вашего ребёнка.',
-  'use.3t': 'Мелочи для быта', 'use.3d': 'Крючок, крепёж, заглушка — нужны сегодня, а не через неделю поисков.',
-  'use.4t': 'Не нужны тиражи', 'use.4d': 'От единственной штуки: печать выгодна даже для одного экземпляра.',
-  'use.5t': 'Десятки цветов', 'use.5d': 'От строгих графитов до ярких акцентов — под интерьер, бренд или вкус.',
-  'use.6t': 'Кастомизация — подарок', 'use.6d': 'Инициалы, имя или узор на вещи — и она становится личным подарком.',
+  'use.eyebrow': 'Знакомство с 3D-печатью', 'use.h2': 'Что можно напечатать', 'use.intro': '3D-печать закрывает очень разные задачи — от бизнеса до быта. Вот лишь несколько примеров.', 'use.divider': 'и это не всё', 'nav.about': 'О печати',
+  'use.1t': 'Декор', 'use.1d': 'Вазы, статуэтки, настенный декор и органайзеры для стола.',
+  'use.2t': 'Игрушки', 'use.2d': 'Фигурки любимых героев и игрушки под интересы вашего ребёнка.',
+  'use.3t': 'Вещи для быта', 'use.3d': 'Крючок, крепёж, подставка — нужны сегодня, а не через неделю.',
+  'use.4t': 'Аксессуары', 'use.4d': 'Брелоки, чехлы, ремешки и украшения под ваш стиль.',
+  'use.5t': 'Реквизит', 'use.5d': 'Элементы костюмов и реквизит для косплееров и съёмок.',
+  'use.6t': 'Корпоративные элементы', 'use.6d': 'Брелоки, таблички и сувениры с логотипом — для клиентов и команды.',
+  'adv.eyebrow': 'Почему 3D-печать', 'adv.h2': 'Преимущества печати',
+  'adv.1t': 'Не нужны тиражи', 'adv.1d': 'От единственной штуки: печать выгодна даже для одного экземпляра.',
+  'adv.2t': 'Десятки цветов', 'adv.2d': 'От строгих графитов до ярких акцентов — под интерьер, бренд или вкус.',
+  'adv.3t': 'Кастомизация — подарок', 'adv.3d': 'Инициалы, имя или узор на вещи — и она становится личным подарком.',
   'how.eyebrow': 'Как заказать', 'how.h2': 'Четыре шага от ссылки до детали',
   'how.intro': 'Никакой подготовки с вашей стороны: моделька уже есть в интернете — этого достаточно.',
   'how.s1t': 'Присылаете ссылку', 'how.s1d': 'На модельку с MakerWorld, Cults3D, Printables или другой площадки — в Telegram или в форму ниже. Бесплатную модельку скачаем сами.',
@@ -996,13 +1037,17 @@ uz: {
   'hero.h1': '3D chop etish vazifangiz uchun — <em>suvenirdan mahkamagichgacha</em>',
   'hero.lead': 'Biznes uchun suvenirlar, bolaga o‘yinchoqlar, uy uchun shoshilinch mayda narsalar — tirajsiz, o‘nlab ranglarda chop etamiz. Ism yoki bosh harflar qo‘shilsa — shaxsiy sovg‘a bo‘ladi.',
   'hero.btn1': 'Model yuborish', 'hero.btn2': 'Buyurtma berish',
-  'use.eyebrow': '3D chop bilan tanishuv', 'use.h2': 'Nimani chop etish mumkin', 'use.intro': '3D chop etish biznesdan uygacha juda har xil vazifalarni yopadi. Mana bir nechta misol.',
-  'use.1t': 'Korporativ elementlar', 'use.1d': 'Logotepingiz bilan brelok, lavha va suvenirlar — mijozlar va jamoa uchun.',
-  'use.2t': 'Bolalar uchun o‘yinchoqlar', 'use.2d': 'Sevimli qahramonlar figuralari va bolaning qiziqishiga mos o‘yinchoqlar.',
-  'use.3t': 'Uy uchun mayda narsalar', 'use.3d': 'Ilkak, mahkamagich, tiqin — bugun kerak, bir hafta kutmay.',
-  'use.4t': 'Tiraj shart emas', 'use.4d': 'Bitta donadan: bitta nusxa uchun ham chop etish arzon.',
-  'use.5t': 'O‘nlab ranglar', 'use.5d': 'Qat’iy kulrangdan yorqin aksentgacha — interyer, brend yoki didingizga mos.',
-  'use.6t': 'Moslashtirilgan sovg‘a', 'use.6d': 'Buyumga ism yoki naqsh — u shaxsiy sovg‘aga aylanadi.',
+  'use.eyebrow': '3D chop bilan tanishuv', 'use.h2': 'Nimani chop etish mumkin', 'use.intro': '3D chop etish biznesdan uygacha juda har xil vazifalarni yopadi. Mana bir nechta misol.', 'use.divider': 'va bu hamma narsa emas', 'nav.about': 'Chop haqida',
+  'use.1t': 'Dekor', 'use.1d': 'Vaza, statuetka, devor dekoratsiyasi va ishxona organayzerlari.',
+  'use.2t': 'O‘yinchoqlar', 'use.2d': 'Sevimli qahramonlar figuralari va bolaga mos o‘yinchoqlar.',
+  'use.3t': 'Uy uchun narsalar', 'use.3d': 'Ilkak, mahkamagich, telefon stendkasi — bugun kerak, bir hafta kutmay.',
+  'use.4t': 'Aksessuarlar', 'use.4d': 'Brelok, g‘ilof, qayish va uslubga mos taqinchoqlar.',
+  'use.5t': 'Rekvizit', 'use.5d': 'Kospleyerlar va suratga olish uchun kostyum elementlari.',
+  'use.6t': 'Korporativ elementlar', 'use.6d': 'Logotepingiz bilan brelok, lavha va suvenirlar — mijozlar va jamoa uchun.',
+  'adv.eyebrow': 'Nega 3D chop etish', 'adv.h2': 'Afzalliklari',
+  'adv.1t': 'Tiraj shart emas', 'adv.1d': 'Bitta donadan: bitta nusxa uchun ham chop etish arzon.',
+  'adv.2t': 'O‘nlab ranglar', 'adv.2d': 'Qat’iy kulrangdan yorqin aksentgacha — interyer, brend yoki didingizga mos.',
+  'adv.3t': 'Moslashtirilgan sovg‘a', 'adv.3d': 'Buyumga ism yoki naqsh — u shaxsiy sovg‘aga aylanadi.',
   'how.eyebrow': 'Buyurtma berish', 'how.h2': 'Havoladan detalgacha — to‘rt qadam',
   'how.intro': 'Sizdan tayyorgarlik talab etilmaydi: model allaqachon internetda — bu yetarli.',
   'how.s1t': 'Havola yuborasiz', 'how.s1d': 'MakerWorld, Cults3D, Printables yoki boshqa platformadagi model havolasini Telegram yoki pastdagi forma orqali yuboring. Bepul modelni o‘zimiz yuklab olamiz.',
@@ -1070,13 +1115,17 @@ en: {
   'hero.h1': '3D printing for your task — <em>from merch to a bracket</em>',
   'hero.lead': 'Corporate merch, toys for kids, urgent household fixes — printed without minimum runs in dozens of colors. Add initials or a name, and it becomes a personal gift.',
   'hero.btn1': 'Send a model', 'hero.btn2': 'How to order',
-  'use.eyebrow': 'Meet 3D printing', 'use.h2': 'What can be printed', 'use.intro': '3D printing covers very different jobs — from business to household. Just a few examples.',
-  'use.1t': 'Corporate items', 'use.1d': 'Keychains, signs and merch with your logo — for clients and the team.',
-  'use.2t': 'Toys for kids', 'use.2d': 'Figures of favourite characters and toys tailored to your child.',
-  'use.3t': 'Household fixes', 'use.3d': 'A hook, a bracket, a cap — ready today, not next week.',
-  'use.4t': 'No bulk needed', 'use.4d': 'From a single piece: printing pays off even for one item.',
-  'use.5t': 'Dozens of colors', 'use.5d': 'From strict graphite to vivid accents — any interior, brand or taste.',
-  'use.6t': 'Custom gifts', 'use.6d': 'Initials, a name or a pattern — and the item becomes a personal gift.',
+  'use.eyebrow': 'Meet 3D printing', 'use.h2': 'What can be printed', 'use.intro': '3D printing covers very different jobs — from business to household. Just a few examples.', 'use.divider': 'and that is not all', 'nav.about': 'About printing',
+  'use.1t': 'Decor', 'use.1d': 'Vases, figurines, wall decor and desk organizers.',
+  'use.2t': 'Toys', 'use.2d': 'Figures of favourite characters and toys tailored to your child.',
+  'use.3t': 'Household items', 'use.3d': 'A hook, a bracket, a phone stand — ready today, not next week.',
+  'use.4t': 'Accessories', 'use.4d': 'Keychains, cases, straps and stylish wearables.',
+  'use.5t': 'Props', 'use.5d': 'Cosplay armour and props for shoots and conventions.',
+  'use.6t': 'Corporate items', 'use.6d': 'Keychains, signs and merch with your logo — for clients and the team.',
+  'adv.eyebrow': 'Why 3D printing', 'adv.h2': 'The advantages',
+  'adv.1t': 'No bulk needed', 'adv.1d': 'From a single piece: printing pays off even for one item.',
+  'adv.2t': 'Dozens of colors', 'adv.2d': 'From strict graphite to vivid accents — any interior, brand or taste.',
+  'adv.3t': 'Custom gifts', 'adv.3d': 'Initials, a name or a pattern — and the item becomes a personal gift.',
   'how.eyebrow': 'How to order', 'how.h2': 'Four steps from link to part',
   'how.intro': 'No preparation needed on your side: the model is already online — that is enough.',
   'how.s1t': 'You send a link', 'how.s1d': 'A model link from MakerWorld, Cults3D, Printables or another platform — via Telegram or the form below. We download free models ourselves.',
@@ -1148,10 +1197,20 @@ function applyLang(l){
   document.querySelectorAll('[data-i18n-html]').forEach(el => el.innerHTML = t(el.dataset.i18nHtml).replace('{N}', window.__pu ? window.__pu.fill() : 20));
   document.querySelectorAll('[data-i18n-ph]').forEach(el => el.placeholder = t(el.dataset.i18nPh));
   document.querySelectorAll('[data-i18n-aria]').forEach(el => el.setAttribute('aria-label', t(el.dataset.i18nAria)));
-  document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('on', b.dataset.lang === l));
+  document.querySelectorAll('.langdd-menu button').forEach(b => b.classList.toggle('on', b.dataset.lang === l));
+  const lc = document.getElementById('langCur'); if (lc) lc.textContent = l.toUpperCase();
   if (window.__pu) { window.__pu.renderMats(); window.__pu.updatePrice(); }
 }
-document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
+const langDD = document.getElementById('langDD'), langCur = document.getElementById('langCur');
+if (langDD && langCur) {
+  langCur.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = langDD.classList.toggle('open');
+    langCur.setAttribute('aria-expanded', open);
+  });
+  document.addEventListener('click', e => { if (!langDD.contains(e.target)) langDD.classList.remove('open'); });
+}
+document.querySelectorAll('.langdd-menu button').forEach(b => b.addEventListener('click', () => { applyLang(b.dataset.lang); langDD.classList.remove('open'); }));
 (function(){
   const u = new URLSearchParams(location.search).get('lang');
   if (u && I18N[u]) return applyLang(u);
