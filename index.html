@@ -285,6 +285,15 @@ footer a{color:#fff;text-decoration:none}
 .tel-field{position:relative}
 .tel-field input{padding-left:72px}
 .tel-prefix{position:absolute;left:16px;top:0;height:100%;display:flex;align-items:center;color:var(--ink);font-weight:700;pointer-events:none;user-select:none}
+#nl-badge-frame,#nl-hud-frame,.nl-wrap{display:none!important;visibility:hidden!important}
+/* ── что можно напечатать ── */
+.uses{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.use{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:8px}
+.use svg{margin-bottom:4px}
+.use h3{margin:0;font-size:16.5px;color:var(--brand)}
+.use p{margin:0;font-size:13.5px;color:var(--mut);line-height:1.55}
+@media(max-width:960px){.uses{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.uses{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -365,13 +374,56 @@ footer a{color:#fff;text-decoration:none}
 <section class="hero" id="top">
   <div class="wrap hero-center">
     <div class="eyebrow" data-i18n="hero.eyebrow">Студия 3D-печати · Ташкент</div>
-    <h1 data-i18n-html="hero.h1">Выбрали модельку — <em>мы её напечатаем</em></h1>
-    <p class="lead" data-i18n="hero.lead">Пришлите ссылку с MakerWorld, Cults3D или другой площадки. Уточним размер, цвет и материал — и напечатаем.</p>
+    <h1 data-i18n-html="hero.h1">3D-печать под вашу задачу — <em>от сувенира до крепежа</em></h1>
+    <p class="lead" data-i18n="hero.lead">Корпоративные сувениры, игрушки для ребёнка, срочные мелочи для дома — печатаем без тиражей, в десятках цветов. Добавим инициалы или имя — получится личный подарок.</p>
     <div class="hero-actions">
       <a class="btn btn-primary" href="#order" data-i18n="hero.btn1">Прислать модельку</a>
       <a class="btn btn-ghost" href="#how" data-i18n="hero.btn2">Как заказать</a>
     </div>
     <!-- ЗАМЕНИТЕ ПОЗЖЕ: сюда встанет фото/рендер работ студии -->
+  </div>
+</section>
+
+<!-- ═══ ЧТО МОЖНО НАПЕЧАТАТЬ ═══ -->
+<section id="uses">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow" data-i18n="use.eyebrow">Знакомство с 3D-печатью</div>
+      <h2 data-i18n="use.h2">Что можно напечатать</h2>
+      <p data-i18n="use.intro">3D-печать закрывает очень разные задачи — от бизнеса до быта. Вот лишь несколько примеров.</p>
+    </div>
+    <div class="uses">
+      <div class="use">
+        <svg viewBox="0 0 120 84" width="72" height="50" fill="none" aria-hidden="true"><rect x="53" y="4" width="14" height="7" rx="3.5" fill="#103349"/><rect x="34" y="10" width="52" height="64" rx="9" fill="#2C8DC9"/><polygon points="60,26 63.3,35.2 73,35.5 65.4,41.6 68.2,51 60,45.4 51.8,51 54.6,41.6 47,35.5 56.7,35.2" fill="#fff"/></svg>
+        <h3 data-i18n="use.1t">Корпоративные элементы</h3>
+        <p data-i18n="use.1d">Брелоки, таблички и сувениры с вашим логотипом — для клиентов и команды.</p>
+      </div>
+      <div class="use">
+        <svg viewBox="0 0 120 84" width="72" height="50" fill="none" aria-hidden="true"><circle cx="42" cy="27" r="9" fill="#2C8DC9"/><circle cx="78" cy="27" r="9" fill="#2C8DC9"/><circle cx="60" cy="47" r="26" fill="#2C8DC9"/><ellipse cx="60" cy="55" rx="12" ry="9" fill="#fff"/><circle cx="60" cy="51" r="4" fill="#103349"/><circle cx="49" cy="41" r="3" fill="#103349"/><circle cx="71" cy="41" r="3" fill="#103349"/></svg>
+        <h3 data-i18n="use.2t">Игрушки для ребёнка</h3>
+        <p data-i18n="use.2d">Фигурки любимых героев и игрушки под интересы вашего ребёнка.</p>
+      </div>
+      <div class="use">
+        <svg viewBox="0 0 120 84" width="72" height="50" fill="none" aria-hidden="true"><rect x="36" y="10" width="48" height="10" rx="4" fill="#103349"/><circle cx="60" cy="16" r="4" fill="#7CC4EA"/><path d="M60 22v14a11 11 0 1 1-11 11" stroke="#2C8DC9" stroke-width="7" stroke-linecap="round" fill="none"/></svg>
+        <h3 data-i18n="use.3t">Мелочи для быта</h3>
+        <p data-i18n="use.3d">Крючок, крепёж, заглушка — нужны сегодня, а не через неделю поисков.</p>
+      </div>
+      <div class="use">
+        <svg viewBox="0 0 120 84" width="72" height="50" fill="none" aria-hidden="true"><path d="M60 10 84 22 60 34 36 22Z" fill="#7CC4EA"/><path d="M36 22v20l24 12V34Z" fill="#2C8DC9"/><path d="M84 22v20L60 54V34Z" fill="#103349"/><text x="60" y="78" text-anchor="middle" font-size="17" font-weight="800" fill="#103349" font-family="Manrope,sans-serif">× 1</text></svg>
+        <h3 data-i18n="use.4t">Не нужны тиражи</h3>
+        <p data-i18n="use.4d">От единственной штуки: печать выгодна даже для одного экземпляра.</p>
+      </div>
+      <div class="use">
+        <svg viewBox="0 0 120 84" width="72" height="50" fill="none" aria-hidden="true"><circle cx="34" cy="42" r="15" fill="#103349" stroke="#fff" stroke-width="3"/><circle cx="52" cy="42" r="15" fill="#2C8DC9" stroke="#fff" stroke-width="3"/><circle cx="70" cy="42" r="15" fill="#7CC4EA" stroke="#fff" stroke-width="3"/><circle cx="88" cy="42" r="15" fill="#D6E9F6" stroke="#fff" stroke-width="3"/></svg>
+        <h3 data-i18n="use.5t">Десятки цветов</h3>
+        <p data-i18n="use.5d">От строгих графитов до ярких акцентов — под интерьер, бренд или вкус.</p>
+      </div>
+      <div class="use">
+        <svg viewBox="0 0 120 84" width="72" height="50" fill="none" aria-hidden="true"><path d="M96 10c2.5-3.5 8-3.5 9 0 1-3.5 6.5-3.5 9 0 2 3-2 7-9 11-7-4-11-8-9-11Z" fill="#7CC4EA"/><rect x="28" y="30" width="64" height="12" rx="5" fill="#103349"/><rect x="32" y="42" width="56" height="34" rx="6" fill="#2C8DC9"/><rect x="55" y="30" width="10" height="46" fill="#fff" opacity=".85"/><circle cx="53" cy="28" r="5" fill="#7CC4EA"/><circle cx="67" cy="28" r="5" fill="#7CC4EA"/></svg>
+        <h3 data-i18n="use.6t">Кастомизация — подарок</h3>
+        <p data-i18n="use.6d">Инициалы, имя или узор на вещи — и она становится личным подарком.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -867,9 +919,16 @@ ru: {
   'nav.how': 'Как заказать', 'nav.calc': 'Калькулятор', 'nav.materials': 'Материалы', 'nav.shop': 'Готовые модельки', 'nav.faq': 'Вопросы', 'nav.cta': 'Оставить заявку',
   'burger': 'Открыть меню',
   'hero.eyebrow': 'Студия 3D-печати · Ташкент',
-  'hero.h1': 'Выбрали модельку — <em>мы её напечатаем</em>',
-  'hero.lead': 'Пришлите ссылку с MakerWorld, Cults3D или другой площадки. Уточним размер, цвет и материал — и напечатаем.',
+  'hero.h1': '3D-печать под вашу задачу — <em>от сувенира до крепежа</em>',
+  'hero.lead': 'Корпоративные сувениры, игрушки для ребёнка, срочные мелочи для дома — печатаем без тиражей, в десятках цветов. Добавим инициалы или имя — получится личный подарок.',
   'hero.btn1': 'Прислать модельку', 'hero.btn2': 'Как заказать',
+  'use.eyebrow': 'Знакомство с 3D-печатью', 'use.h2': 'Что можно напечатать', 'use.intro': '3D-печать закрывает очень разные задачи — от бизнеса до быта. Вот лишь несколько примеров.',
+  'use.1t': 'Корпоративные элементы', 'use.1d': 'Брелоки, таблички и сувениры с вашим логотипом — для клиентов и команды.',
+  'use.2t': 'Игрушки для ребёнка', 'use.2d': 'Фигурки любимых героев и игрушки под интересы вашего ребёнка.',
+  'use.3t': 'Мелочи для быта', 'use.3d': 'Крючок, крепёж, заглушка — нужны сегодня, а не через неделю поисков.',
+  'use.4t': 'Не нужны тиражи', 'use.4d': 'От единственной штуки: печать выгодна даже для одного экземпляра.',
+  'use.5t': 'Десятки цветов', 'use.5d': 'От строгих графитов до ярких акцентов — под интерьер, бренд или вкус.',
+  'use.6t': 'Кастомизация — подарок', 'use.6d': 'Инициалы, имя или узор на вещи — и она становится личным подарком.',
   'how.eyebrow': 'Как заказать', 'how.h2': 'Четыре шага от ссылки до детали',
   'how.intro': 'Никакой подготовки с вашей стороны: моделька уже есть в интернете — этого достаточно.',
   'how.s1t': 'Присылаете ссылку', 'how.s1d': 'На модельку с MakerWorld, Cults3D, Printables или другой площадки — в Telegram или в форму ниже. Бесплатную модельку скачаем сами.',
@@ -934,9 +993,16 @@ uz: {
   'nav.how': 'Buyurtma berish', 'nav.calc': 'Kalkulyator', 'nav.materials': 'Materiallar', 'nav.shop': 'Tayyor modellalar', 'nav.faq': 'Savollar', 'nav.cta': 'Ariza qoldirish',
   'burger': 'Menyuni ochish',
   'hero.eyebrow': '3D chop studiyasi · Toshkent',
-  'hero.h1': 'Modelni tanladingiz — <em>biz uni chop etamiz</em>',
-  'hero.lead': 'MakerWorld, Cults3D yoki boshqa platformadan havola yuboring. O‘lcham, rang va materialni kelishib olib — chop etamiz.',
+  'hero.h1': '3D chop etish vazifangiz uchun — <em>suvenirdan mahkamagichgacha</em>',
+  'hero.lead': 'Biznes uchun suvenirlar, bolaga o‘yinchoqlar, uy uchun shoshilinch mayda narsalar — tirajsiz, o‘nlab ranglarda chop etamiz. Ism yoki bosh harflar qo‘shilsa — shaxsiy sovg‘a bo‘ladi.',
   'hero.btn1': 'Model yuborish', 'hero.btn2': 'Buyurtma berish',
+  'use.eyebrow': '3D chop bilan tanishuv', 'use.h2': 'Nimani chop etish mumkin', 'use.intro': '3D chop etish biznesdan uygacha juda har xil vazifalarni yopadi. Mana bir nechta misol.',
+  'use.1t': 'Korporativ elementlar', 'use.1d': 'Logotepingiz bilan brelok, lavha va suvenirlar — mijozlar va jamoa uchun.',
+  'use.2t': 'Bolalar uchun o‘yinchoqlar', 'use.2d': 'Sevimli qahramonlar figuralari va bolaning qiziqishiga mos o‘yinchoqlar.',
+  'use.3t': 'Uy uchun mayda narsalar', 'use.3d': 'Ilkak, mahkamagich, tiqin — bugun kerak, bir hafta kutmay.',
+  'use.4t': 'Tiraj shart emas', 'use.4d': 'Bitta donadan: bitta nusxa uchun ham chop etish arzon.',
+  'use.5t': 'O‘nlab ranglar', 'use.5d': 'Qat’iy kulrangdan yorqin aksentgacha — interyer, brend yoki didingizga mos.',
+  'use.6t': 'Moslashtirilgan sovg‘a', 'use.6d': 'Buyumga ism yoki naqsh — u shaxsiy sovg‘aga aylanadi.',
   'how.eyebrow': 'Buyurtma berish', 'how.h2': 'Havoladan detalgacha — to‘rt qadam',
   'how.intro': 'Sizdan tayyorgarlik talab etilmaydi: model allaqachon internetda — bu yetarli.',
   'how.s1t': 'Havola yuborasiz', 'how.s1d': 'MakerWorld, Cults3D, Printables yoki boshqa platformadagi model havolasini Telegram yoki pastdagi forma orqali yuboring. Bepul modelni o‘zimiz yuklab olamiz.',
@@ -1001,9 +1067,16 @@ en: {
   'nav.how': 'How to order', 'nav.calc': 'Calculator', 'nav.materials': 'Materials', 'nav.shop': 'Ready-made models', 'nav.faq': 'FAQ', 'nav.cta': 'Leave a request',
   'burger': 'Open menu',
   'hero.eyebrow': '3D printing studio · Tashkent',
-  'hero.h1': 'You pick a model — <em>we print it</em>',
-  'hero.lead': 'Send a link from MakerWorld, Cults3D or any other platform. We confirm the size, color and material — and print it.',
+  'hero.h1': '3D printing for your task — <em>from merch to a bracket</em>',
+  'hero.lead': 'Corporate merch, toys for kids, urgent household fixes — printed without minimum runs in dozens of colors. Add initials or a name, and it becomes a personal gift.',
   'hero.btn1': 'Send a model', 'hero.btn2': 'How to order',
+  'use.eyebrow': 'Meet 3D printing', 'use.h2': 'What can be printed', 'use.intro': '3D printing covers very different jobs — from business to household. Just a few examples.',
+  'use.1t': 'Corporate items', 'use.1d': 'Keychains, signs and merch with your logo — for clients and the team.',
+  'use.2t': 'Toys for kids', 'use.2d': 'Figures of favourite characters and toys tailored to your child.',
+  'use.3t': 'Household fixes', 'use.3d': 'A hook, a bracket, a cap — ready today, not next week.',
+  'use.4t': 'No bulk needed', 'use.4d': 'From a single piece: printing pays off even for one item.',
+  'use.5t': 'Dozens of colors', 'use.5d': 'From strict graphite to vivid accents — any interior, brand or taste.',
+  'use.6t': 'Custom gifts', 'use.6d': 'Initials, a name or a pattern — and the item becomes a personal gift.',
   'how.eyebrow': 'How to order', 'how.h2': 'Four steps from link to part',
   'how.intro': 'No preparation needed on your side: the model is already online — that is enough.',
   'how.s1t': 'You send a link', 'how.s1d': 'A model link from MakerWorld, Cults3D, Printables or another platform — via Telegram or the form below. We download free models ourselves.',
