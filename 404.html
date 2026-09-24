@@ -174,9 +174,13 @@ footer a{color:#fff;text-decoration:none}
 .soc a{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:rgba(255,255,255,.85);transition:color .2s}
 .soc a:hover{color:#7cc4ea}
 .soc svg{width:15px;height:15px;flex:none}
-.lang{display:flex;gap:3px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:3px;flex:none}
-.lang button{border:0;background:transparent;border-radius:7px;padding:5px 8px;font-size:12px;font-weight:700;color:var(--mut);text-transform:uppercase;cursor:pointer;transition:.2s}
-.lang button.on{background:var(--brand);color:#fff}
+.langdd{position:relative;flex:none}
+.langdd-cur{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px;font-size:12px;font-weight:800;color:var(--brand);text-transform:uppercase;cursor:pointer}
+.langdd-menu{position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid var(--line);border-radius:10px;padding:4px;display:none;flex-direction:column;gap:2px;min-width:64px;box-shadow:0 8px 22px rgba(16,51,73,.12);z-index:60}
+.langdd.open .langdd-menu{display:flex}
+.langdd-menu button{border:0;background:transparent;border-radius:7px;padding:7px 10px;font-size:12px;font-weight:700;color:var(--mut);text-transform:uppercase;cursor:pointer;text-align:left;transition:.15s}
+.langdd-menu button:hover{background:var(--soft);color:var(--brand)}
+.langdd-menu button.on{background:var(--brand);color:#fff}
 
 /* ── бургер-меню (мобилка/планшет) ── */
 .burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 10px}
@@ -299,8 +303,11 @@ main.e404main{min-height:60vh;display:flex;align-items:center;justify-content:ce
       <a href="/#shop" data-i18n="nav.shop">Готовые модельки</a>
       <a href="/#faq" data-i18n="nav.faq">Вопросы</a>
     </nav>
-    <div class="lang" role="group" aria-label="Язык">
-      <button type="button" data-lang="ru" class="on">RU</button><button type="button" data-lang="uz">UZ</button><button type="button" data-lang="en">EN</button>
+    <div class="langdd" id="langDD">
+      <button type="button" class="langdd-cur" id="langCur" aria-haspopup="true" aria-expanded="false">RU</button>
+      <div class="langdd-menu" role="group" aria-label="Язык">
+        <button type="button" data-lang="ru">RU</button><button type="button" data-lang="uz">UZ</button><button type="button" data-lang="en">EN</button>
+      </div>
     </div>
     <a class="cta" href="/#order" data-i18n="nav.cta">Оставить заявку</a>
     <button class="burger" id="burger" type="button" data-i18n-aria="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobileMenu">
@@ -378,9 +385,19 @@ function applyLang(l){
   document.title = t('title');
   document.querySelectorAll('[data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
   document.querySelectorAll('[data-i18n-aria]').forEach(el => el.setAttribute('aria-label', t(el.dataset.i18nAria)));
-  document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('on', b.dataset.lang === l));
+  document.querySelectorAll('.langdd-menu button').forEach(b => b.classList.toggle('on', b.dataset.lang === l));
+  const lc = document.getElementById('langCur'); if (lc) lc.textContent = l.toUpperCase();
 }
-document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
+const langDD = document.getElementById('langDD'), langCur = document.getElementById('langCur');
+if (langDD && langCur) {
+  langCur.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = langDD.classList.toggle('open');
+    langCur.setAttribute('aria-expanded', open);
+  });
+  document.addEventListener('click', e => { if (!langDD.contains(e.target)) langDD.classList.remove('open'); });
+}
+document.querySelectorAll('.langdd-menu button').forEach(b => b.addEventListener('click', () => { applyLang(b.dataset.lang); langDD.classList.remove('open'); }));
 (function(){
   const burger = document.getElementById('burger'), mMenu = document.getElementById('mobileMenu');
   if (burger && mMenu) {
