@@ -274,6 +274,19 @@ footer a{color:#fff;text-decoration:none}
 .shop-card h3{font-size:20px}
 .shop-card p{color:var(--mut);font-size:14.5px;flex:1}
 .shop-card .btn{margin-top:26px;justify-content:center}
+.author-logo{flex:none;width:88px;height:88px;border-radius:50%}
+.author-logo img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.authors-head{margin:36px 0 16px}
+.authors-head h3{margin:0 0 6px;font-size:19px;color:var(--brand)}
+.authors-head p{margin:0;color:var(--mut);font-size:14px}
+.authors{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x proximity;padding:6px 2px 14px;-webkit-overflow-scrolling:touch}
+.authors::-webkit-scrollbar{height:8px}
+.authors::-webkit-scrollbar-thumb{background:#c7d4dd;border-radius:4px}
+.author{flex:0 0 300px;scroll-snap-align:start;display:flex;align-items:center;gap:16px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;text-decoration:none;transition:box-shadow .2s,transform .2s}
+.author:hover{box-shadow:0 10px 24px rgba(16,51,73,.10);transform:translateY(-2px)}
+.author b{display:block;color:var(--brand);font-size:16px;line-height:1.3}
+.author i{display:block;font-style:normal;color:var(--accent);font-size:13px;font-weight:700;margin-top:5px}
+@media(max-width:560px){.author{flex-basis:min(300px,82vw)}}
 
 /* ── прелоадер: принтер печатает фигурку (1 раз в день) ── */
 #splash{position:fixed;inset:0;z-index:9999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;animation:splashOut .35s ease 1.65s forwards}
@@ -565,6 +578,23 @@ footer a{color:#fff;text-decoration:none}
         <p data-i18n="shop.c2d">Печатаете модельки и хотите, чтобы их продавали в Узбекистане? Мы покупаем коммерческую лицензию на ваши работы, печатаем тираж, занимаемся рекламой и продажами на Uzum.</p>
         <a class="btn btn-ghost" href="https://t.me/printuniverse_support" target="_blank" rel="noopener" style="justify-content:center" data-i18n="shop.c2b">Написать о сотрудничестве</a>
       </div>
+    </div>
+    <div class="authors-head">
+      <h3 data-i18n="shop.a3t">Авторы, с которыми мы сотрудничаем</h3>
+    </div>
+    <div class="authors">
+      <a class="author" href="https://www.instagram.com/valeriamomo_mattia3d/" target="_blank" rel="noopener">
+          <span class="author-logo"><img src="author-valeria.jpg" alt=""></span>
+        <span><b>Valeria Momo & Mattia 3D</b><i>Instagram</i></span>
+      </a>
+      <a class="author" href="https://www.instagram.com/superprints3d/" target="_blank" rel="noopener">
+          <span class="author-logo"><img src="author-superprints.jpg" alt=""></span>
+        <span><b>SuperPrints3D</b><i>Instagram</i></span>
+      </a>
+      <a class="author" href="https://www.instagram.com/makerize3d/" target="_blank" rel="noopener">
+          <span class="author-logo"><img src="author-makerize.png" alt=""></span>
+        <span><b>Makerize3D</b><i>Instagram</i></span>
+      </a>
     </div>
   </div>
 </section>
@@ -1005,7 +1035,7 @@ ru: {
   'shop.eyebrow': 'Готовые модельки', 'shop.h2': 'Готовые модельки на Uzum',
   'shop.p': 'Печатаем коллекции авторов, с которыми сотрудничаем официально: покупаем коммерческую лицензию, печатаем, рекламируем и продаём готовые изделия на маркетплейсе Uzum.',
   'shop.c1t': 'Для покупателей', 'shop.c1d': 'Готовые напечатанные модельки — фигурки, декор, полезные мелочи — можно просто купить, не разбираясь в файлах и пластиках. Заказы на Uzum доставляют по всему Узбекистану.', 'shop.c1b': 'Смотреть на Uzum',
-  'shop.c2t': 'Для авторов моделей', 'shop.c2d': 'Печатаете модельки и хотите, чтобы их продавали в Узбекистане? Мы покупаем коммерческую лицензию на ваши работы, печатаем тираж, занимаемся рекламой и продажами на Uzum.', 'shop.c2b': 'Написать о сотрудничестве',
+  'shop.c2t': 'Для авторов моделей', 'shop.c2d': 'Печатаете модельки и хотите, чтобы их продавали в Узбекистане? Мы покупаем коммерческую лицензию на ваши работы, печатаем тираж, занимаемся рекламой и продажами на Uzum.', 'shop.c2b': 'Написать о сотрудничестве', 'shop.a3t': 'Авторы, с которыми мы сотрудничаем',
   'faq.eyebrow': 'Вопросы и ответы', 'faq.h2': 'Частые вопросы',
   'faq.q1': 'У меня есть ссылка на модельку, но не скачан файл. Подойдёт?',
   'faq.a1': 'Да, это основной сценарий. Пришлите ссылку с MakerWorld, Cults3D, Printables и других площадок — бесплатную модельку скачаем сами и посчитаем стоимость. Если моделька платная, купите файл у автора и приложите к заявке.',
@@ -1083,7 +1113,7 @@ uz: {
   'shop.eyebrow': 'Tayyor modellalar', 'shop.h2': 'Uzum’da tayyor modellalar',
   'shop.p': 'Rasmiy hamkorlik qiladigan mualliflar kolleksiyalarini chop etamiz: tijorat litsenziyasini sotib olamiz, chop etamiz, reklama qilamiz va tayyor mahsulotlarni Uzum marketpleysida sotamiz.',
   'shop.c1t': 'Xaridorlar uchun', 'shop.c1d': 'Tayyor chop etilgan modellalar — figuralar, dekor, foydali mayda narsalar — fayllar va plastiklarni chuqur bilmasdan oddiygina sotib olish mumkin. Uzum buyurtmalari butun O‘zbekiston bo‘ylab yetkaziladi.', 'shop.c1b': 'Uzum’da ko‘rish',
-  'shop.c2t': 'Model mualliflari uchun', 'shop.c2d': 'Modellarni chop etasiz va ularni O‘zbekistonda sotilishini xohlaysizmi? Ishlaringizga tijorat litsenziyasini sotib olamiz, tirajni chop etamiz, Uzum’da reklama va savdoni o‘z zimmamizga olamiz.', 'shop.c2b': 'Hamkorlik haqida yozish',
+  'shop.c2t': 'Model mualliflari uchun', 'shop.c2d': 'Modellarni chop etasiz va ularni O‘zbekistonda sotilishini xohlaysizmi? Ishlaringizga tijorat litsenziyasini sotib olamiz, tirajni chop etamiz, Uzum’da reklama va savdoni o‘z zimmamizga olamiz.', 'shop.c2b': 'Hamkorlik haqida yozish', 'shop.a3t': 'Biz bilan hamkorlik qiladigan mualliflar',
   'faq.eyebrow': 'Savollar va javoblar', 'faq.h2': 'Ko‘p beriladigan savollar',
   'faq.q1': 'Model havolasi bor, lekin fayl yuklab olinmagan. Mos keladimi?',
   'faq.a1': 'Ha, bu asosiy ssenariy. MakerWorld, Cults3D, Printables va boshqa platformalardan havola yuboring — bepul modelni o‘zimiz yuklab olib, narxni hisoblab beramiz. Pullik model bo‘lsa, faylni muallifdan sotib olib arizaga ilova qiling.',
@@ -1161,7 +1191,7 @@ en: {
   'shop.eyebrow': 'Ready-made models', 'shop.h2': 'Ready-made models on Uzum',
   'shop.p': 'We print collections by authors we officially work with: we buy a commercial license, print, promote and sell the finished items on the Uzum marketplace.',
   'shop.c1t': 'For buyers', 'shop.c1d': 'Ready printed models — figurines, decor and useful little things — can simply be bought, no need to deal with files and filaments. Uzum orders are delivered across Uzbekistan.', 'shop.c1b': 'View on Uzum',
-  'shop.c2t': 'For model authors', 'shop.c2d': 'Do you print models and want them sold in Uzbekistan? We buy a commercial license for your works, print the run and handle promotion and sales on Uzum.', 'shop.c2b': 'Contact about cooperation',
+  'shop.c2t': 'For model authors', 'shop.c2d': 'Do you print models and want them sold in Uzbekistan? We buy a commercial license for your works, print the run and handle promotion and sales on Uzum.', 'shop.c2b': 'Contact about cooperation', 'shop.a3t': 'Authors we partner with',
   'faq.eyebrow': 'FAQ', 'faq.h2': 'Common questions',
   'faq.q1': 'I have a link to a model but no downloaded file. Is that OK?',
   'faq.a1': 'Yes, that is the main scenario. Send a link from MakerWorld, Cults3D, Printables or other platforms — we download free models ourselves and estimate the cost. For paid models, buy the file from the author and attach it to your request.',
