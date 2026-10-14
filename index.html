@@ -44,7 +44,8 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--carbon);color:var(--ink);font-family:'Manrope',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+html{background:var(--carbon)}
+body{color:var(--ink);font-family:'Manrope',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
 ::selection{background:var(--accent);color:#fff}
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
 h1,h2,h3{font-family:'Aristotelica Pro','Manrope',sans-serif;font-weight:600;line-height:1.15;letter-spacing:-.01em;color:var(--brand)}
@@ -276,6 +277,15 @@ footer a{color:#fff;text-decoration:none}
 .shop-card .btn{margin-top:26px;justify-content:center}
 .author-logo{flex:none;width:88px;height:88px;border-radius:50%}
 .author-logo img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+
+/* ── сетка-коврик за курсором (пустой фон, десктоп) ── */
+.gridfx{position:fixed;left:0;top:0;width:224px;height:224px;pointer-events:none;z-index:-1;opacity:0;transition:opacity .4s ease;
+ -webkit-mask-image:radial-gradient(circle at center,rgba(0,0,0,.9) 26%,transparent 70%);mask-image:radial-gradient(circle at center,rgba(0,0,0,.9) 26%,transparent 70%);
+ background-image:linear-gradient(rgba(44,141,201,.22) 1px,transparent 1px),linear-gradient(90deg,rgba(44,141,201,.22) 1px,transparent 1px);
+ background-size:34px 34px,34px 34px}
+.gridfx.on{opacity:1;transition:opacity .16s ease}
+@media(prefers-reduced-motion:reduce){.gridfx{display:none}}
+
 .authors-head{margin:36px 0 16px}
 .authors-head h3{margin:0 0 6px;font-size:19px;color:var(--brand)}
 .authors-head p{margin:0;color:var(--mut);font-size:14px}
@@ -322,6 +332,7 @@ footer a{color:#fff;text-decoration:none}
 </style>
 </head>
 <body>
+<div class="gridfx" id="gridFX" aria-hidden="true"></div>
 <div id="splash">
   <svg width="150" height="130" viewBox="0 0 120 110" fill="none" aria-hidden="true">
     <path d="M14 22H106" stroke="#103349" stroke-width="3" stroke-linecap="round"/>
@@ -1247,6 +1258,34 @@ document.querySelectorAll('.langdd-menu button').forEach(b => b.addEventListener
   if (u && I18N[u]) return applyLang(u);
   let s = null; try{ s = localStorage.getItem('pu-lang'); }catch(e){}
   applyLang(s && I18N[s] ? s : 'ru');
+})();
+(function(){
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const g = document.getElementById('gridFX'); if (!g) return;
+  const S = 34, R = 112;
+  const OK = 'body, section, .wrap, footer, .hero, .hero-grid, .hero-copy, .sec-head, .uses, .steps, .mats, .shop-grid, .authors, .faq-list';
+  let tx = -1, ty = -1, cx = -1, cy = -1, idle = 0;
+  addEventListener('mousemove', e => {
+    idle = 0;
+    const t = e.target;
+    if (!(t && t.matches && t.matches(OK))) { g.classList.remove('on'); return; }
+    tx = e.clientX; ty = e.clientY;
+    if (cx < 0) { cx = tx; cy = ty; }
+    g.classList.add('on');
+  }, { passive: true });
+  document.addEventListener('mouseleave', () => { g.classList.remove('on'); tx = -1; });
+  (function loop(){
+    if (g.classList.contains('on') && tx >= 0) {
+      cx += (tx - cx) * .3; cy += (ty - cy) * .3;
+      const px = Math.round(cx - R), py = Math.round(cy - R);
+      g.style.transform = 'translate(' + px + 'px,' + py + 'px)';
+      g.style.backgroundPosition = (-(((px % S) + S) % S)) + 'px ' + (-(((py % S) + S) % S)) + 'px';
+    } else if (tx < 0) { cx = cy = -1; }
+    idle += 16;
+    if (idle > 700 && g.classList.contains('on')) g.classList.remove('on');
+    requestAnimationFrame(loop);
+  })();
 })();
 (function(){
   const sp = document.getElementById('splash');
