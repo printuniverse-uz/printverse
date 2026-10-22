@@ -177,7 +177,9 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .form .note a{color:#7cc4ea;text-decoration:none}
 .form-status{font-size:13px;color:#9fe3c0;min-height:18px}
 
-footer{padding:34px 0;background:var(--brand);color:rgba(255,255,255,.75);font-size:13px}
+footer{position:relative;padding:34px 0;color:rgba(255,255,255,.75);font-size:13px}
+footer::before{content:'';position:absolute;inset:0;background:var(--brand);z-index:1}
+footer .wrap{position:relative;z-index:2}
 .foot{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
 footer a{color:#fff;text-decoration:none}
 
@@ -336,6 +338,14 @@ footer a{color:#fff;text-decoration:none}
 .uses-3{grid-template-columns:repeat(3,1fr)}
 @media(max-width:960px){.uses-3{grid-template-columns:1fr}}
 .uses-divider::before,.uses-divider::after{content:'';flex:1;height:1px;background:var(--line)}
+:root{--fxm:#2da7a7}
+.btn-flexi{border:1px solid var(--line);background:#fff;color:var(--brand)}
+.btn-flexi:hover{background:var(--fxm);border-color:var(--fxm);color:#fff}
+.fxc{position:absolute;right:56px;bottom:calc(100% - 24px);z-index:0;line-height:0;--fxc:#103349;transition:transform .25s;filter:drop-shadow(0 -2px 8px rgba(16,51,73,.10))}
+.fxc:hover{--fxc:var(--fxm);transform:translateY(-7px)}
+.fxc svg{width:86px;height:64px}
+.fxc svg path{transition:fill .25s}
+@media(max-width:560px){.fxc{right:18px;bottom:calc(100% - 15px)}.fxc svg{width:60px;height:45px}}
 </style>
 <script type="application/ld+json">
 {
@@ -561,6 +571,7 @@ footer a{color:#fff;text-decoration:none}
     <div class="hero-actions">
       <a class="btn btn-primary" href="#order" data-i18n="hero.btn1">Прислать модельку</a>
       <a class="btn btn-ghost" href="#how" data-i18n="hero.btn2">Как заказать</a>
+      <a class="btn btn-flexi" href="#" data-i18n="hero.flexi">Flexi Pets</a>
     </div>
     <!-- ЗАМЕНИТЕ ПОЗЖЕ: сюда встанет фото/рендер работ студии -->
   </div>
@@ -749,9 +760,13 @@ footer a{color:#fff;text-decoration:none}
       </a>
     </div>
     <div class="authors-head">
-      <h3 data-i18n="shop.a4t">Наши клиенты</h3>
+      <h3 data-i18n="shop.a4t">Наши заказчики</h3>
     </div>
     <div class="clients">
+      <div class="client">
+        <span class="author-logo"><img src="client-click.png" alt=""></span>
+        <span><b>Click</b></span>
+      </div>
       <div class="client">
         <span class="author-logo"><img src="client-feruza.png" alt=""></span>
         <span><b>Feruza Gafurovna Interior</b></span>
@@ -808,6 +823,17 @@ footer a{color:#fff;text-decoration:none}
 
 
 <footer>
+<a class="fxc" href="#" aria-label="Flexi Pets" title="Flexi Pets">
+  <svg viewBox="0 0 132 92" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M26 92 V44 Q26 18 71 18 Q116 18 116 44 V92 Z" fill="var(--fxc,#103349)"/>
+    <path d="M30 40 L36 5 L54 19 Z" fill="var(--fxc,#103349)"/>
+    <path d="M112 40 L106 5 L88 19 Z" fill="var(--fxc,#103349)"/>
+    <path d="M36 30 L38 13 L48 19 Z" fill="#ffffff"/>
+    <path d="M106 30 L104 13 L94 19 Z" fill="#ffffff"/>
+    <g class="fxeye" transform="translate(55,46)"><circle r="6.5" fill="#fff"/><g class="fxpupil"><circle r="3.1" fill="#103349"/><circle cx="1.1" cy="-1.2" r="1" fill="#fff"/></g></g>
+    <g class="fxeye" transform="translate(87,46)"><circle r="6.5" fill="#fff"/><g class="fxpupil"><circle r="3.1" fill="#103349"/><circle cx="1.1" cy="-1.2" r="1" fill="#fff"/></g></g>
+  </svg>
+</a>
   <!-- ЗАМЕНИТЕ: контакты, реквизиты -->
   <div class="wrap foot">
     <span data-i18n-html="foot.brand"><span>© 2026 <b>PrintUniverse</b> — студия 3D-печати · <span class="mono">printverse.uz · Ташкент</span></span></span>
@@ -1150,7 +1176,7 @@ ru: {
   'hero.eyebrow': 'Студия 3D-печати · Ташкент',
   'hero.h1': '3D-печать под вашу задачу —<br><em>от сувенира до игрушки</em>',
   'hero.lead': 'Корпоративные сувениры, игрушки для ребёнка, срочные мелочи для дома — печатаем без тиражей, в десятках цветов. Добавим инициалы или имя — получится личный подарок.',
-  'hero.btn1': 'Прислать модельку', 'hero.btn2': 'Как заказать',
+  'hero.btn1': 'Прислать модельку', 'hero.btn2': 'Как заказать', 'hero.flexi': 'Flexi Pets',
   'use.eyebrow': 'Знакомство с 3D-печатью', 'use.h2': 'Что можно напечатать', 'use.intro': '3D-печать закрывает очень разные задачи — от бизнеса до быта. Вот лишь несколько примеров.', 'nav.about': 'О печати',
   'use.1t': 'Декор', 'use.1d': 'Вазы, статуэтки, настенный декор и органайзеры для стола.',
   'use.2t': 'Игрушки', 'use.2d': 'Фигурки любимых героев и игрушки под интересы вашего ребёнка.',
@@ -1196,7 +1222,7 @@ ru: {
   'shop.eyebrow': 'Готовые модельки', 'shop.h2': 'Готовые модельки на Uzum',
   'shop.p': 'Печатаем коллекции авторов, с которыми сотрудничаем официально: покупаем коммерческую лицензию, печатаем, рекламируем и продаём готовые изделия на маркетплейсе Uzum.',
   'shop.c1t': 'Для покупателей', 'shop.c1d': 'Готовые напечатанные модельки — фигурки, декор, полезные мелочи — можно просто купить, не разбираясь в файлах и пластиках. Заказы на Uzum доставляют по всему Узбекистану.', 'shop.c1b': 'Смотреть на Uzum',
-  'shop.c2t': 'Для авторов моделей', 'shop.c2d': 'Печатаете модельки и хотите, чтобы их продавали в Узбекистане? Мы покупаем коммерческую лицензию на ваши работы, печатаем тираж, занимаемся рекламой и продажами на Uzum.', 'shop.c2b': 'Написать о сотрудничестве', 'shop.a3t': 'Авторы, с которыми мы сотрудничаем', 'shop.a4t': 'Наши клиенты',
+  'shop.c2t': 'Для авторов моделей', 'shop.c2d': 'Печатаете модельки и хотите, чтобы их продавали в Узбекистане? Мы покупаем коммерческую лицензию на ваши работы, печатаем тираж, занимаемся рекламой и продажами на Uzum.', 'shop.c2b': 'Написать о сотрудничестве', 'shop.a3t': 'Авторы, с которыми мы сотрудничаем', 'shop.a4t': 'Наши заказчики',
   'faq.eyebrow': 'Вопросы и ответы', 'faq.h2': 'Частые вопросы',
   'faq.q1': 'У меня есть ссылка на модельку, но не скачан файл. Подойдёт?',
   'faq.a1': 'Да, это основной сценарий. Пришлите ссылку с MakerWorld, Cults3D, Printables и других площадок — бесплатную модельку скачаем сами и посчитаем стоимость. Если моделька платная, купите файл у автора и приложите к заявке.',
@@ -1228,7 +1254,7 @@ uz: {
   'hero.eyebrow': '3D chop studiyasi · Toshkent',
   'hero.h1': '3D chop etish vazifangiz uchun —<br><em>suvenirdan o‘yinchoqgacha</em>',
   'hero.lead': 'Biznes uchun suvenirlar, bolaga o‘yinchoqlar, uy uchun shoshilinch mayda narsalar — tirajsiz, o‘nlab ranglarda chop etamiz. Ism yoki bosh harflar qo‘shilsa — shaxsiy sovg‘a bo‘ladi.',
-  'hero.btn1': 'Model yuborish', 'hero.btn2': 'Buyurtma berish',
+  'hero.btn1': 'Model yuborish', 'hero.btn2': 'Buyurtma berish', 'hero.flexi': 'Flexi Pets',
   'use.eyebrow': '3D chop bilan tanishuv', 'use.h2': 'Nimani chop etish mumkin', 'use.intro': '3D chop etish biznesdan uygacha juda har xil vazifalarni yopadi. Mana bir nechta misol.', 'nav.about': 'Chop haqida',
   'use.1t': 'Dekor', 'use.1d': 'Vaza, statuetka, devor dekoratsiyasi va ishxona organayzerlari.',
   'use.2t': 'O‘yinchoqlar', 'use.2d': 'Sevimli qahramonlar figuralari va bolaga mos o‘yinchoqlar.',
@@ -1274,7 +1300,7 @@ uz: {
   'shop.eyebrow': 'Tayyor modellalar', 'shop.h2': 'Uzum’da tayyor modellalar',
   'shop.p': 'Rasmiy hamkorlik qiladigan mualliflar kolleksiyalarini chop etamiz: tijorat litsenziyasini sotib olamiz, chop etamiz, reklama qilamiz va tayyor mahsulotlarni Uzum marketpleysida sotamiz.',
   'shop.c1t': 'Xaridorlar uchun', 'shop.c1d': 'Tayyor chop etilgan modellalar — figuralar, dekor, foydali mayda narsalar — fayllar va plastiklarni chuqur bilmasdan oddiygina sotib olish mumkin. Uzum buyurtmalari butun O‘zbekiston bo‘ylab yetkaziladi.', 'shop.c1b': 'Uzum’da ko‘rish',
-  'shop.c2t': 'Model mualliflari uchun', 'shop.c2d': 'Modellarni chop etasiz va ularni O‘zbekistonda sotilishini xohlaysizmi? Ishlaringizga tijorat litsenziyasini sotib olamiz, tirajni chop etamiz, Uzum’da reklama va savdoni o‘z zimmamizga olamiz.', 'shop.c2b': 'Hamkorlik haqida yozish', 'shop.a3t': 'Biz bilan hamkorlik qiladigan mualliflar', 'shop.a4t': 'Bizning mijozlar',
+  'shop.c2t': 'Model mualliflari uchun', 'shop.c2d': 'Modellarni chop etasiz va ularni O‘zbekistonda sotilishini xohlaysizmi? Ishlaringizga tijorat litsenziyasini sotib olamiz, tirajni chop etamiz, Uzum’da reklama va savdoni o‘z zimmamizga olamiz.', 'shop.c2b': 'Hamkorlik haqida yozish', 'shop.a3t': 'Biz bilan hamkorlik qiladigan mualliflar', 'shop.a4t': 'Bizning buyurtmachilar',
   'faq.eyebrow': 'Savollar va javoblar', 'faq.h2': 'Ko‘p beriladigan savollar',
   'faq.q1': 'Model havolasi bor, lekin fayl yuklab olinmagan. Mos keladimi?',
   'faq.a1': 'Ha, bu asosiy ssenariy. MakerWorld, Cults3D, Printables va boshqa platformalardan havola yuboring — bepul modelni o‘zimiz yuklab olib, narxni hisoblab beramiz. Pullik model bo‘lsa, faylni muallifdan sotib olib arizaga ilova qiling.',
@@ -1306,7 +1332,7 @@ en: {
   'hero.eyebrow': '3D printing studio · Tashkent',
   'hero.h1': '3D printing for your task —<br><em>from merch to toys</em>',
   'hero.lead': 'Corporate merch, toys for kids, urgent household fixes — printed without minimum runs in dozens of colors. Add initials or a name, and it becomes a personal gift.',
-  'hero.btn1': 'Send a model', 'hero.btn2': 'How to order',
+  'hero.btn1': 'Send a model', 'hero.btn2': 'How to order', 'hero.flexi': 'Flexi Pets',
   'use.eyebrow': 'Meet 3D printing', 'use.h2': 'What can be printed', 'use.intro': '3D printing covers very different jobs — from business to household. Just a few examples.', 'nav.about': 'About printing',
   'use.1t': 'Decor', 'use.1d': 'Vases, figurines, wall decor and desk organizers.',
   'use.2t': 'Toys', 'use.2d': 'Figures of favourite characters and toys tailored to your child.',
@@ -1442,6 +1468,31 @@ document.querySelectorAll('.langdd-menu button').forEach(b => b.addEventListener
   if (!sp) return;
   try{ localStorage.setItem('pu-splash-day', new Date().toDateString()); }catch(e){}
   setTimeout(() => sp.remove(), 2400);
+})();
+</script>
+<script>
+(function(){
+  const cat = document.querySelector('.fxc'); if(!cat) return;
+  const eyes = cat.querySelectorAll('.fxeye');
+  let mx = null, my = null;
+  addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; });
+  (function loop(){
+    eyes.forEach(function(eye){
+      const r = eye.getBoundingClientRect(), cx = r.left + r.width/2, cy = r.top + r.height/2;
+      let tx = 0, ty = 0;
+      if (mx !== null) {
+        const dx = mx - cx, dy = my - cy, d = Math.hypot(dx, dy) || 1;
+        const k = Math.min(1, d / 220);
+        tx = dx / d * 2.6 * k; ty = dy / d * 2.6 * k;
+      }
+      const p = eye.querySelector('.fxpupil');
+      const x = (parseFloat(p.dataset.x) || 0) + (tx - (parseFloat(p.dataset.x) || 0)) * .12;
+      const y = (parseFloat(p.dataset.y) || 0) + (ty - (parseFloat(p.dataset.y) || 0)) * .12;
+      p.dataset.x = x; p.dataset.y = y;
+      p.setAttribute('transform', 'translate(' + x.toFixed(2) + ',' + y.toFixed(2) + ')');
+    });
+    requestAnimationFrame(loop);
+  })();
 })();
 </script>
 </body>
