@@ -298,14 +298,15 @@ footer a{color:#fff;text-decoration:none}
 .authors-head{margin:36px 0 16px}
 .authors-head h3{margin:0 0 6px;font-size:19px;color:var(--brand)}
 .authors-head p{margin:0;color:var(--mut);font-size:14px}
-.authors,.clients{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x proximity;padding:6px 2px 14px;-webkit-overflow-scrolling:touch}
+.authors,.clients{display:flex;flex-wrap:wrap;gap:16px;padding:6px 2px 14px}
 .authors::-webkit-scrollbar,.clients::-webkit-scrollbar{height:8px}
 .authors::-webkit-scrollbar-thumb,.clients::-webkit-scrollbar-thumb{background:#c7d4dd;border-radius:4px}
-.author,.client{flex:0 0 300px;scroll-snap-align:start;display:flex;align-items:center;gap:16px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;text-decoration:none;transition:border-color .2s}
+.author,.client{flex:0 0 300px;display:flex;align-items:center;gap:16px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;text-decoration:none;transition:border-color .2s}
 .author:hover{border-color:var(--accent)}
 .author b,.client b{display:block;color:var(--brand);font-size:16px;line-height:1.3}
 .author i{display:block;font-style:normal;color:var(--accent);font-size:13px;font-weight:700;margin-top:5px}
 @media(max-width:560px){.author,.client{flex-basis:min(300px,82vw)}}
+.authors-head:first-child{margin-top:0}
 
 /* ── прелоадер: принтер печатает фигурку (1 раз в день) ── */
 #splash{position:fixed;inset:0;z-index:9999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;animation:splashOut .35s ease 1.65s forwards}
@@ -742,10 +743,17 @@ footer a{color:#fff;text-decoration:none}
         <a class="btn btn-ghost" href="https://t.me/printuniverse_support" target="_blank" rel="noopener" style="justify-content:center" data-i18n="shop.c2b">Написать о сотрудничестве</a>
       </div>
     </div>
+
+  </div>
+</section>
+
+<!-- ═══ ПАРТНЁРСТВО: АВТОРЫ И ЗАКАЗЧИКИ ═══ -->
+<section id="partners">
+  <div class="wrap">
     <div class="authors-head">
       <h3 data-i18n="shop.a3t">Авторы, с которыми мы сотрудничаем</h3>
     </div>
-    <div class="authors">
+        <div class="authors">
       <a class="author" href="https://www.instagram.com/valeriamomo_mattia3d/" target="_blank" rel="noopener">
           <span class="author-logo"><img src="author-valeria.jpg" alt=""></span>
         <span><b>Valeria Momo & Mattia 3D</b><i>Instagram</i></span>
@@ -759,19 +767,31 @@ footer a{color:#fff;text-decoration:none}
         <span><b>Makerize3D</b><i>Instagram</i></span>
       </a>
     </div>
-    <div class="authors-head">
+        <div class="authors-head">
       <h3 data-i18n="shop.a4t">Наши заказчики</h3>
     </div>
-    <div class="clients">
+        <div class="clients">
       <div class="client">
         <span class="author-logo"><img src="client-click.png" alt=""></span>
         <span><b>Click</b></span>
       </div>
       <div class="client">
-        <span class="author-logo"><img src="client-feruza.png" alt=""></span>
-        <span><b>Feruza Gafurovna Interior</b></span>
+        <span class="author-logo"><img src="client-djidali.png" alt=""></span>
+        <span><b>Djidali Ecological Tourism Service</b></span>
       </div>
-    </div>
+      <div class="client">
+        <span class="author-logo"><img src="client-mialine.png" alt=""></span>
+        <span><b>Mialine</b></span>
+      </div>
+      <div class="client">
+        <span class="author-logo"><img src="client-solomiata.png" alt=""></span>
+        <span><b>Solo Miata</b></span>
+      </div>
+      <div class="client">
+        <span class="author-logo"><img src="client-feruza.png" alt=""></span>
+        <span><b>Feruza Gafurovna Interior Studio</b></span>
+      </div>
+      </div>
   </div>
 </section>
 
