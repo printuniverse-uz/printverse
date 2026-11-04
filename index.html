@@ -28,14 +28,6 @@
    файл (woff2) в папку fonts/ рядом с index.html на хостинге:
    fonts/AristotelicaPro.woff2. Пока файла нет, заголовки показываются
    дополнительным шрифтом Manrope. */
-@font-face{
-  font-family:'Aristotelica Pro';
-  src:url('fonts/AristotelicaPro.woff2') format('woff2'),
-      url('fonts/AristotelicaPro.woff') format('woff');
-  font-weight:400 800;
-  font-style:normal;
-  font-display:swap;
-}
 /* ── ПАЛИТРА ── */
 :root{
   --carbon:#ffffff;      /* фон страницы */
@@ -142,6 +134,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .step .n{font-family:'Manrope',sans-serif;font-variant-numeric:tabular-nums;color:var(--accent);font-size:13px;margin-bottom:14px;display:block}
 .step h3{font-size:17px;margin-bottom:8px;font-weight:600}
 .step p{color:var(--mut);font-size:14.5px}
+.steps-note{margin-top:22px;font-size:13px;color:var(--mut);max-width:820px}
 
 /* ── materials ── */
 .mats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
@@ -347,6 +340,13 @@ footer a{color:#fff;text-decoration:none}
 .fxc svg{width:86px;height:64px}
 .fxc svg path{transition:fill .25s}
 @media(max-width:560px){.fxc{right:18px;bottom:calc(100% - 15px)}.fxc svg{width:60px;height:45px}}
+
+.foot-legal{position:relative;z-index:2;margin-top:12px;font-size:11.5px}
+.foot-legal a{color:rgba(255,255,255,.7);text-decoration:underline;text-underline-offset:2px}
+html,body{margin:0}
+footer{margin-bottom:0}
+html,body{overflow-x:hidden}
+body{padding-bottom:0}
 </style>
 <script type="application/ld+json">
 {
@@ -468,7 +468,7 @@ footer a{color:#fff;text-decoration:none}
    "name": "Где купить готовые модельки без своей заявки?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "На маркетплейсе Uzum — мы печатаем и продаём там коллекции авторов, с которыми работаем по коммерческим лицензиям. Ссылка на магазин — в разделе «Готовые модельки»."
+    "text": "На маркетплейсе Uzum — мы печатаем и продаём там коллекции авторов, с которыми работаем по коммерческим лицензиям."
    }
   },
   {
@@ -478,10 +478,25 @@ footer a{color:#fff;text-decoration:none}
     "@type": "Answer",
     "text": "Самовывоз в Ташкенте или доставка по Узбекистану. Перед отправкой пришлём фото готовой модельки и упаковки."
    }
+  },
+  {
+   "@type": "Question",
+   "name": "Пришлёте файл модельки (STL)?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Нет, мы не распространяем и не передаём электронные копии моделей (STL, OBJ, 3MF и другие). Результат заказа — физическое изделие."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "А как с лицензиями на модельки и известными персонажами?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Об этом — коротко в разделе «Печать и лицензии» политики конфиденциальности: как работают площадки, что с лицензиями и модельками известных персонажей."
+   }
   }
  ]
-}
-</script>
+}</script>
 </head>
 <body>
 <div class="gridfx" id="gridFX" aria-hidden="true"></div>
@@ -651,11 +666,12 @@ footer a{color:#fff;text-decoration:none}
       <p data-i18n="how.intro">Никакой подготовки с вашей стороны: моделька уже есть в интернете — этого достаточно.</p>
     </div>
     <div class="steps wide">
-      <div class="step"><span class="n">01</span><h3 data-i18n="how.s1t">Присылаете ссылку</h3><p data-i18n="how.s1d">На модельку с MakerWorld, Cults3D, Printables или другой площадки — в Telegram или в форму ниже. Бесплатную модельку скачаем сами.</p></div>
+      <div class="step"><span class="n">01</span><h3 data-i18n="how.s1t">Присылаете ссылку</h3><p data-i18n="how.s1d">На модельку с MakerWorld, Cults3D, Printables или другой площадки* — в Telegram или в форму ниже. Бесплатную модельку скачаем сами.</p></div>
       <div class="step"><span class="n">02</span><h3 data-i18n="how.s2t">Уточняем детали</h3><p data-i18n="how.s2d">Размер, цвет, материал, заполнение. Называем цену и срок — печать пойдёт сразу после вашего «ок».</p></div>
       <div class="step"><span class="n">03</span><h3 data-i18n="how.s3t">Печатаем</h3><p data-i18n="how.s3d">Работаем по мере возможности: мелкие заказы часто печатаем между крупными. Предупредим, когда начнётся печать, и пришлём фото готовой модельки.</p></div>
       <div class="step"><span class="n">04</span><h3 data-i18n="how.s4t">Передача товара</h3><p data-i18n="how.s4d">Самовывоз в Ташкенте или доставка по Узбекистану. Бережно упаковываем.</p></div>
     </div>
+    <p class="steps-note" data-i18n="how.legal">*MakerWorld, Cults3D, Printables и подобные площадки — это маркетплейсы, где авторы публикуют свои 3D-модели. У каждой площадки — свои правила, а у каждой модельки — своя лицензия (CC BY, CC BY-NC и подобные), определяющая, что можно с ней делать. Отправляя заявку, заказчик принимает на себя ответственность за соблюдение этих правил и лицензий: мы выполняем исключительно услугу печати по вашей просьбе.</p>
   </div>
 </section>
 
@@ -734,7 +750,7 @@ footer a{color:#fff;text-decoration:none}
       <div class="shop-card">
         <h3 data-i18n="shop.c1t">Для покупателей</h3>
         <p data-i18n="shop.c1d">Готовые напечатанные модельки — фигурки, декор, полезные мелочи — можно просто купить, не разбираясь в файлах и пластиках. Заказы на Uzum доставляют по всему Узбекистану.</p>
-        <a class="btn btn-primary" href="https://uzum.uz/ru/shop/prntver-flexi-pets" target="_blank" rel="noopener" style="justify-content:center" data-i18n="shop.c1b">Смотреть на Uzum</a>
+        <a class="btn btn-primary" href="#" style="justify-content:center" data-i18n="shop.c1b">Смотреть на Uzum</a>
       </div>
       <div class="shop-card">
         <h3 data-i18n="shop.c2t">Для авторов моделей</h3>
@@ -808,8 +824,10 @@ footer a{color:#fff;text-decoration:none}
       <details><summary data-i18n="faq.q4">Вы моделируете на заказ?</summary><div class="a" data-i18n="faq.a4">Нет, мы не занимаемся 3D-моделированием — но простое сделаем: плоскую модельку по вашей картинке или надпись (имя) на детали подготовим сами. Печатаем готовые модельки по ссылкам с площадок, ваши собственные файлы STL/OBJ/3MF — и коллекции авторов, с которыми сотрудничаем.</div></details>
       <details><summary data-i18n="faq.q5">Какие материалы и цвета есть?</summary><div class="a" data-i18n-html="faq.a5">Основа — PLA (фигурки, декор, модели), плюс PETG (прочные детали) и TPU (гибкие). Палитру цветов пришлём в <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener">Telegram</a> — подберём под вашу модельку.</div></details>
       <details><summary data-i18n="faq.q6">Какой максимальный размер?</summary><div class="a" data-i18n="faq.a6">Одна деталь — примерно 250×250×250 мм. Модельки больше печатаем по частям и аккуратно собираем.</div></details>
-      <details><summary data-i18n="faq.q7">Где купить готовые модельки без своей заявки?</summary><div class="a" data-i18n="faq.a7">На маркетплейсе Uzum — мы печатаем и продаём там коллекции авторов, с которыми работаем по коммерческим лицензиям. Ссылка на магазин — в разделе «Готовые модельки».</div></details>
+      <details><summary data-i18n="faq.q7">Где купить готовые модельки без своей заявки?</summary><div class="a" data-i18n="faq.a7">На маркетплейсе Uzum — мы печатаем и продаём там коллекции авторов, с которыми работаем по коммерческим лицензиям.</div></details>
       <details><summary data-i18n="faq.q8">Как получить заказ?</summary><div class="a" data-i18n="faq.a8">Самовывоз в Ташкенте или доставка по Узбекистану. Перед отправкой пришлём фото готовой модельки и упаковки.</div></details>
+      <details><summary data-i18n="faq.q9">Пришлёте файл модельки (STL)?</summary><div class="a" data-i18n="faq.a9">Нет, мы не распространяем и не передаём электронные копии моделей (STL, OBJ, 3MF и другие). Результат заказа — физическое изделие.</div></details>
+      <details><summary data-i18n="faq.q10">А как с лицензиями на модельки и известными персонажами?</summary><div class="a" data-i18n-html="faq.a10">Об этом — коротко в разделе «Печать и лицензии» <a href="privacy.html">политики конфиденциальности</a>: как работают площадки, что с лицензиями и модельками известных персонажей.</div></details>
     </div>
   </div>
 </section>
@@ -833,7 +851,7 @@ footer a{color:#fff;text-decoration:none}
         <input type="text" id="fCompany" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;top:0;width:1px;height:1px;opacity:0">
         <button class="btn btn-primary" type="submit" style="justify-content:center" data-i18n="order.submit">Отправить заявку</button>
         <div class="form-status" id="formStatus"></div>
-        <div class="note" data-i18n-html="order.note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных. <a href="privacy.html">Политика конфиденциальности</a> (закон РУз «О персональных данных», ЗРУ-547 от 02.07.2019).</div>
+        <div class="note" data-i18n-html="order.note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных. <a href="privacy.html">Политика конфиденциальности</a> (закон РУз «О персональных данных», ЗРУ-547 от 02.07.2019). Отправляя заявку, заказчик принимает на себя всю ответственность за заказ.</div>
       </form>
     </div>
   </div>
@@ -863,6 +881,7 @@ footer a{color:#fff;text-decoration:none}
       <a href="https://t.me/printuniverse" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.1 18.6 19.3c-.25 1.1-.9 1.37-1.83.85l-5.05-3.72-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.14 9.36-8.46c.4-.36-.09-.56-.63-.2L5.87 12.87.9 11.31c-1.08-.34-1.1-1.08.22-1.6L20.5 3.02c.9-.33 1.69.2 1.4 1.08z"/></svg>Telegram</a>
     </span>
   </div>
+  <div class="wrap"><div class="foot-legal"><a href="privacy.html" data-i18n="foot.privacy">Политика конфиденциальности</a></div></div>
 </footer>
 
 <script type="importmap">
@@ -1209,7 +1228,8 @@ ru: {
   'adv.3t': 'Кастомизация — подарок', 'adv.3d': 'Инициалы, имя или узор на вещи — и она становится личным подарком.',
   'how.eyebrow': 'Как заказать', 'how.h2': 'Четыре шага от ссылки до детали',
   'how.intro': 'Никакой подготовки с вашей стороны: моделька уже есть в интернете — этого достаточно.',
-  'how.s1t': 'Присылаете ссылку', 'how.s1d': 'На модельку с MakerWorld, Cults3D, Printables или другой площадки — в Telegram или в форму ниже. Бесплатную модельку скачаем сами.',
+  'how.s1t': 'Присылаете ссылку', 'how.s1d': 'На модельку с MakerWorld, Cults3D, Printables или другой площадки* — в Telegram или в форму ниже. Бесплатную модельку скачаем сами.',
+  'how.legal': '*MakerWorld, Cults3D, Printables и подобные площадки — это маркетплейсы, где авторы публикуют свои 3D-модели. У каждой площадки — свои правила, а у каждой модельки — своя лицензия (CC BY, CC BY-NC и подобные), определяющая, что можно с ней делать. Отправляя заявку, заказчик принимает на себя ответственность за соблюдение этих правил и лицензий: мы выполняем исключительно услугу печати по вашей просьбе.',
   'how.s2t': 'Уточняем детали', 'how.s2d': 'Размер, цвет, материал, заполнение. Называем цену и срок — печать пойдёт сразу после вашего «ок».',
   'how.s3t': 'Печатаем', 'how.s3d': 'Работаем по мере возможности: мелкие заказы часто печатаем между крупными. Предупредим, когда начнётся печать, и пришлём фото готовой модельки.',
   'how.s4t': 'Передача товара', 'how.s4d': 'Самовывоз в Ташкенте или доставка по Узбекистану. Бережно упаковываем.',
@@ -1240,7 +1260,8 @@ ru: {
   'form.fallback': 'Не удалось отправить автоматически — текст заявки скопирован, отправьте его нам в <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener">Telegram</a>.',
   'shop.eyebrow': 'Готовые модельки', 'shop.h2': 'Готовые модельки на Uzum',
   'shop.p': 'Печатаем коллекции авторов, с которыми сотрудничаем официально: покупаем коммерческую лицензию, печатаем, рекламируем и продаём готовые изделия на маркетплейсе Uzum.',
-  'shop.c1t': 'Для покупателей', 'shop.c1d': 'Готовые напечатанные модельки — фигурки, декор, полезные мелочи — можно просто купить, не разбираясь в файлах и пластиках. Заказы на Uzum доставляют по всему Узбекистану.', 'shop.c1b': 'Смотреть на Uzum',
+  'shop.c1t': 'Для покупателей', 'shop.c1d': 'Готовые напечатанные модельки — фигурки, декор, полезные мелочи — можно просто купить, не разбираясь в файлах и пластиках. Заказы на Uzum доставляют по всему Узбекистану.',
+  'shop.c1b': 'Смотреть на Uzum',
   'shop.c2t': 'Для авторов моделей', 'shop.c2d': 'Печатаете модельки и хотите, чтобы их продавали в Узбекистане? Мы покупаем коммерческую лицензию на ваши работы, печатаем тираж, занимаемся рекламой и продажами на Uzum.', 'shop.c2b': 'Написать о сотрудничестве', 'shop.a3t': 'Авторы, с которыми мы сотрудничаем', 'shop.a4t': 'Наши заказчики',
   'faq.eyebrow': 'Вопросы и ответы', 'faq.h2': 'Частые вопросы',
   'faq.q1': 'У меня есть ссылка на модельку, но не скачан файл. Подойдёт?',
@@ -1256,15 +1277,20 @@ ru: {
   'faq.q6': 'Какой максимальный размер?',
   'faq.a6': 'Одна деталь — примерно 250×250×250 мм. Модельки больше печатаем по частям и аккуратно собираем.',
   'faq.q7': 'Где купить готовые модельки без своей заявки?',
-  'faq.a7': 'На маркетплейсе Uzum — мы печатаем и продаём там коллекции авторов, с которыми работаем по коммерческим лицензиям. Ссылка на магазин — в разделе «Готовые модельки».',
+  'faq.a7': 'На маркетплейсе Uzum — мы печатаем и продаём там коллекции авторов, с которыми работаем по коммерческим лицензиям.',
   'faq.q8': 'Как получить заказ?',
   'faq.a8': 'Самовывоз в Ташкенте или доставка по Узбекистану. Перед отправкой пришлём фото готовой модельки и упаковки.',
+  'faq.q9': 'Пришлёте файл модельки (STL)?',
+  'faq.a9': 'Нет, мы не распространяем и не передаём электронные копии моделей (STL, OBJ, 3MF и другие). Результат заказа — физическое изделие.',
+  'faq.q10': 'А как с лицензиями на модельки и известными персонажами?',
+  'faq.a10': 'Об этом — коротко в разделе «Печать и лицензии» <a href="privacy.html">политики конфиденциальности</a>: как работают площадки, что с лицензиями и модельками известных персонажей.',
   'order.eyebrow': 'Заявка', 'order.h2': 'Обсудим вашу модельку',
   'order.p': 'Пришлите ссылку на модельку или просто опишите свою идею — что хотите получить, какой размер и цвет. Ответим и проконсультируем по всем деталям. Быстрее всего пишите сразу в <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener" style="color:#7cc4ea">Telegram</a> или <a href="https://www.instagram.com/printuniverse_uz" target="_blank" rel="noopener" style="color:#7cc4ea">Instagram</a>.',
   'ph.name': 'Как к вам обращаться', 'ph.contact': '(90) 123 45 67', 'ph.tg': 'Telegram — @username (необязательно)', 'ph.link': 'Ссылка на модельку — MakerWorld, Cults3D, Printables…', 'ph.desc': 'Размер, цвет, материал, количество — или задайте вопрос',
   'order.submit': 'Отправить заявку',
-  'order.note': 'Нажимая кнопку, вы соглашаетесь на обработку персональных данных. <a href="privacy.html">Политика конфиденциальности</a> (закон РУз «О персональных данных», ЗРУ-547 от 02.07.2019).',
+  'order.note': 'Нажимая кнопку, вы соглашаетесь на обработку персональных данных. <a href="privacy.html">Политика конфиденциальности</a> (закон РУз «О персональных данных», ЗРУ-547 от 02.07.2019). Отправляя заявку, заказчик принимает на себя всю ответственность за заказ.',
   'foot.brand': '© 2026 <b>PrintUniverse</b> — студия 3D-печати · <span class="mono">printverse.uz · Ташкент</span>',
+  'foot.privacy': 'Политика конфиденциальности',
 },
 uz: {
   'meta.title': 'PrintUniverse — Toshkentda buyurtma asosida 3D chop etish',
@@ -1287,7 +1313,8 @@ uz: {
   'adv.3t': 'Moslashtirilgan sovg‘a', 'adv.3d': 'Buyumga ism yoki naqsh — u shaxsiy sovg‘aga aylanadi.',
   'how.eyebrow': 'Buyurtma berish', 'how.h2': 'Havoladan detalgacha — to‘rt qadam',
   'how.intro': 'Sizdan tayyorgarlik talab etilmaydi: model allaqachon internetda — bu yetarli.',
-  'how.s1t': 'Havola yuborasiz', 'how.s1d': 'MakerWorld, Cults3D, Printables yoki boshqa platformadagi model havolasini Telegram yoki pastdagi forma orqali yuboring. Bepul modelni o‘zimiz yuklab olamiz.',
+  'how.s1t': 'Havola yuborasiz', 'how.s1d': 'MakerWorld, Cults3D, Printables yoki boshqa platformadagi* model havolasini Telegram yoki pastdagi forma orqali yuboring. Bepul modelni o‘zimiz yuklab olamiz.',
+  'how.legal': '*MakerWorld, Cults3D, Printables va shunga o‘xshash platformalar — mualliflar 3D-modellari joylashadigan marketpleyslar. Har bir platformaning o‘z qoidalari, har bir modelning esa o‘z litsenziyasi (CC BY, CC BY-NC va boshqalar) bor — u model bilan nima qilish mumkinligini belgilaydi. Ariza yuborib, buyurtmachi platforma qoidalari va litsenziyalarga rioy etish javobgarligini o‘z zimmasiga oladi: biz arizangiz asosida faqat chop etish xizmatini bajaramiz.',
   'how.s2t': 'Tafsilotlarni kelishamiz', 'how.s2d': 'O‘lcham, rang, material, to‘ldirish. Narx va muddatni aytamiz — chop etish sizning “ha”ingizdan keyin boshlanadi.',
   'how.s3t': 'Chop etamiz', 'how.s3d': 'Imkoniyatga qarab ishlaymiz: kichik buyurtmalarni ko‘pincha yiriklar orasida chop etamiz. Chop etish boshlanganda xabar beramiz, tayyor modelning rasmini yuboramiz.',
   'how.s4t': 'Mahsulot topshirish', 'how.s4d': 'Toshkentda o‘zib olish yoki O‘zbekiston bo‘ylab yetkazish. Ehtiyotkorlik bilan qadoqlaymiz.',
@@ -1318,7 +1345,8 @@ uz: {
   'form.fallback': 'Avtomatik yuborib bo\'lmadi — ariza matni nusxalandi, uni bizga <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener">Telegram</a> orqali yuboring.',
   'shop.eyebrow': 'Tayyor modellalar', 'shop.h2': 'Uzum’da tayyor modellalar',
   'shop.p': 'Rasmiy hamkorlik qiladigan mualliflar kolleksiyalarini chop etamiz: tijorat litsenziyasini sotib olamiz, chop etamiz, reklama qilamiz va tayyor mahsulotlarni Uzum marketpleysida sotamiz.',
-  'shop.c1t': 'Xaridorlar uchun', 'shop.c1d': 'Tayyor chop etilgan modellalar — figuralar, dekor, foydali mayda narsalar — fayllar va plastiklarni chuqur bilmasdan oddiygina sotib olish mumkin. Uzum buyurtmalari butun O‘zbekiston bo‘ylab yetkaziladi.', 'shop.c1b': 'Uzum’da ko‘rish',
+  'shop.c1t': 'Xaridorlar uchun', 'shop.c1d': 'Tayyor chop etilgan modellalar — figuralar, dekor, foydali mayda narsalar — fayllar va plastiklarni chuqur bilmasdan oddiygina sotib olish mumkin. Uzum buyurtmalari butun O‘zbekiston bo‘ylab yetkaziladi.',
+  'shop.c1b': 'Uzumda ko‘rish',
   'shop.c2t': 'Model mualliflari uchun', 'shop.c2d': 'Modellarni chop etasiz va ularni O‘zbekistonda sotilishini xohlaysizmi? Ishlaringizga tijorat litsenziyasini sotib olamiz, tirajni chop etamiz, Uzum’da reklama va savdoni o‘z zimmamizga olamiz.', 'shop.c2b': 'Hamkorlik haqida yozish', 'shop.a3t': 'Biz bilan hamkorlik qiladigan mualliflar', 'shop.a4t': 'Bizning buyurtmachilar',
   'faq.eyebrow': 'Savollar va javoblar', 'faq.h2': 'Ko‘p beriladigan savollar',
   'faq.q1': 'Model havolasi bor, lekin fayl yuklab olinmagan. Mos keladimi?',
@@ -1334,15 +1362,20 @@ uz: {
   'faq.q6': 'Maksimal o‘lcham qancha?',
   'faq.a6': 'Bitta detal — taxminan 250×250×250 mm. Kattaroq modellarni qismlarga chop etib, ehtiyotkorlik bilan yig‘amiz.',
   'faq.q7': 'Ariza yubormasdan tayyor modellarni qayerdan olsa bo‘ladi?',
-  'faq.a7': 'Uzum marketpleysida — u yerda tijorat litsenziyalari asosida ishlaydigan mualliflar kolleksiyalarini chop etib sotamiz. Do‘kon havolasi “Tayyor modellalar” bo‘limida.',
+  'faq.a7': 'Uzum marketpleysida — u yerda tijorat litsenziyalari asosida ishlaydigan mualliflar kolleksiyalarini chop etib sotamiz.',
   'faq.q8': 'Buyurtmani qanday olaman?',
   'faq.a8': 'Toshkentda o‘zib olish yoki O‘zbekiston bo‘ylab yetkazib berish. Yuborishdan oldin tayyor model va qadoq rasmlarini yuboramiz.',
+  'faq.q9': 'Model faylini (STL) yuborasizmi?',
+  'faq.a9': 'Yo‘q, modellarning elektron nusxalarini (STL, OBJ, 3MF va boshqalar) tarqatmaymiz va hech kimga bermaymiz. Buyurtma natijasi — jismoniy buyum.',
+  'faq.q10': 'Model litsenziyalari va mashhur personajlar haqida-chi?',
+  'faq.a10': 'Bularning barchasi — <a href="privacy.html">Maxfiylik siyosati</a>dagi «Chop etish va litsenziyalar» bo‘limida qisqacha: platformalar qanday ishlaydi, litsenziyalar va mashhur personajli modellar haqida.',
   'order.eyebrow': 'Ariza', 'order.h2': 'Modelingizni muhokama qilamiz',
   'order.p': 'Model havolasini yuboring yoki g‘oyangizni yozib bering — nima kerakligini, o‘lchamini va rangini. Barcha tafsilotlar bo‘yicha javob beramiz va maslahat beramiz. Eng tez yo‘l: darhol <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener" style="color:#7cc4ea">Telegram</a> yoki <a href="https://www.instagram.com/printuniverse_uz" target="_blank" rel="noopener" style="color:#7cc4ea">Instagram</a> orqali yozing.',
   'ph.name': 'Ismingiz', 'ph.contact': '(90) 123 45 67', 'ph.tg': 'Telegram — @username (majburiy emas)', 'ph.link': 'Model havolasi — MakerWorld, Cults3D, Printables…', 'ph.desc': 'O‘lcham, rang, material, miqdor — yoki savol bering',
   'order.submit': 'Arizani yuborish',
-  'order.note': 'Tugmani bosganingizda shaxsiy ma’lumotlarni qayta ishlashga rozilik bildirasiz. <a href="privacy.html">Maxfiylik siyosati</a> (O‘zR “Shaxsiy ma’lumotlar to‘g‘risida”gi qonuni, ZRU-547, 02.07.2019).',
+  'order.note': 'Tugmani bosganingizda shaxsiy ma’lumotlarni qayta ishlashga rozilik bildirasiz. <a href="privacy.html">Maxfiylik siyosati</a> (O‘zR “Shaxsiy ma’lumotlar to‘g‘risida”gi qonuni, ZRU-547, 02.07.2019). Ariza yuborib, buyurtmachi buyurtma bo‘yicha barcha javobgarlikni o‘z zimmasiga oladi.',
   'foot.brand': '© 2026 <b>PrintUniverse</b> — 3D chop studiyasi · <span class="mono">printverse.uz · Toshkent</span>',
+  'foot.privacy': 'Maxfiylik siyosati',
 },
 en: {
   'meta.title': 'PrintUniverse — 3D printing on demand in Tashkent',
@@ -1365,7 +1398,8 @@ en: {
   'adv.3t': 'Custom gifts', 'adv.3d': 'Initials, a name or a pattern — and the item becomes a personal gift.',
   'how.eyebrow': 'How to order', 'how.h2': 'Four steps from link to part',
   'how.intro': 'No preparation needed on your side: the model is already online — that is enough.',
-  'how.s1t': 'You send a link', 'how.s1d': 'A model link from MakerWorld, Cults3D, Printables or another platform — via Telegram or the form below. We download free models ourselves.',
+  'how.s1t': 'You send a link', 'how.s1d': 'A model link from MakerWorld, Cults3D, Printables or another platform* — via Telegram or the form below. We download free models ourselves.',
+  'how.legal': '*MakerWorld, Cults3D, Printables and similar platforms are marketplaces where authors publish their 3D models. Every platform has its own rules, and every model has its own license (CC BY, CC BY-NC and others) that defines what can be done with it. By sending a request, the customer assumes responsibility for complying with these rules and licenses: we provide the printing service only, on your request.',
   'how.s2t': 'We confirm details', 'how.s2d': 'Size, color, material, infill. We quote the price and lead time — printing starts right after your approval.',
   'how.s3t': 'We print', 'how.s3d': 'We work as capacity allows: small orders are often printed between large ones. We tell you when printing starts and send a photo of the finished model.',
   'how.s4t': 'Handover', 'how.s4d': 'Pickup in Tashkent or delivery across Uzbekistan. We pack with care.',
@@ -1396,7 +1430,8 @@ en: {
   'form.fallback': 'Auto-send failed — your request text was copied, please send it to us via <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener">Telegram</a>.',
   'shop.eyebrow': 'Ready-made models', 'shop.h2': 'Ready-made models on Uzum',
   'shop.p': 'We print collections by authors we officially work with: we buy a commercial license, print, promote and sell the finished items on the Uzum marketplace.',
-  'shop.c1t': 'For buyers', 'shop.c1d': 'Ready printed models — figurines, decor and useful little things — can simply be bought, no need to deal with files and filaments. Uzum orders are delivered across Uzbekistan.', 'shop.c1b': 'View on Uzum',
+  'shop.c1t': 'For buyers', 'shop.c1d': 'Ready printed models — figurines, decor and useful little things — can simply be bought, no need to deal with files and filaments. Uzum orders are delivered across Uzbekistan.',
+  'shop.c1b': 'View on Uzum',
   'shop.c2t': 'For model authors', 'shop.c2d': 'Do you print models and want them sold in Uzbekistan? We buy a commercial license for your works, print the run and handle promotion and sales on Uzum.', 'shop.c2b': 'Contact about cooperation', 'shop.a3t': 'Authors we partner with', 'shop.a4t': 'Our clients',
   'faq.eyebrow': 'FAQ', 'faq.h2': 'Common questions',
   'faq.q1': 'I have a link to a model but no downloaded file. Is that OK?',
@@ -1412,15 +1447,20 @@ en: {
   'faq.q6': 'What is the maximum size?',
   'faq.a6': 'A single part is about 250×250×250 mm. Larger models are printed in parts and carefully assembled.',
   'faq.q7': 'Where to buy ready models without a custom request?',
-  'faq.a7': 'On the Uzum marketplace — we print and sell there collections by authors we work with under commercial licenses. The shop link is in the “Ready-made models” section.',
+  'faq.a7': 'On the Uzum marketplace — we print and sell there collections by authors we work with under commercial licenses.',
   'faq.q8': 'How do I receive my order?',
   'faq.a8': 'Pickup in Tashkent or delivery across Uzbekistan. Before shipping we send photos of the finished model and packaging.',
+  'faq.q9': 'Will you send the model file (STL)?',
+  'faq.a9': 'No, we do not distribute or share electronic copies of models (STL, OBJ, 3MF and others). The result of the order is the physical item.',
+  'faq.q10': 'What about model licenses and famous characters?',
+  'faq.a10': 'It is all covered briefly in the “Printing and licenses” section of the <a href="privacy.html">privacy policy</a>: how the platforms work, licenses and models of famous characters.',
   'order.eyebrow': 'Request', 'order.h2': 'Let’s discuss your model',
   'order.p': 'Send a link to a model or simply describe your idea — what you want, the size and the color. We will reply and advise on all the details. The fastest way is to write straight to <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener" style="color:#7cc4ea">Telegram</a> or <a href="https://www.instagram.com/printuniverse_uz" target="_blank" rel="noopener" style="color:#7cc4ea">Instagram</a>.',
   'ph.name': 'Your name', 'ph.contact': '(90) 123 45 67', 'ph.tg': 'Telegram — @username (optional)', 'ph.link': 'Model link — MakerWorld, Cults3D, Printables…', 'ph.desc': 'Size, color, material, quantity — or ask a question',
   'order.submit': 'Send request',
-  'order.note': 'By clicking the button you consent to the processing of personal data. <a href="privacy.html">Privacy policy</a> (Law of Uzbekistan “On Personal Data”, ZRU-547 of 02.07.2019).',
+  'order.note': 'By clicking the button you consent to the processing of personal data. <a href="privacy.html">Privacy policy</a> (Law of Uzbekistan “On Personal Data”, ZRU-547 of 02.07.2019). By sending the request, the customer assumes full responsibility for the order.',
   'foot.brand': '© 2026 <b>PrintUniverse</b> — 3D printing studio · <span class="mono">printverse.uz · Tashkent</span>',
+  'foot.privacy': 'Privacy policy',
 },
 };
 var lang = 'ru';

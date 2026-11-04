@@ -15,14 +15,6 @@
    файл (woff2) в папку fonts/ рядом с index.html на хостинге:
    fonts/AristotelicaPro.woff2. Пока файла нет, заголовки показываются
    дополнительным шрифтом Manrope. */
-@font-face{
-  font-family:'Aristotelica Pro';
-  src:url('fonts/AristotelicaPro.woff2') format('woff2'),
-      url('fonts/AristotelicaPro.woff') format('woff');
-  font-weight:400 800;
-  font-style:normal;
-  font-display:swap;
-}
 /* ── ПАЛИТРА ── */
 :root{
   --carbon:#ffffff;      /* фон страницы */
@@ -296,6 +288,11 @@ main.e404main{min-height:60vh;display:flex;align-items:center;justify-content:ce
  background-size:34px 34px,34px 34px}
 .gridfx.on{opacity:1;transition:opacity .16s ease}
 @media(prefers-reduced-motion:reduce){.gridfx{display:none}}
+.foot-legal{position:relative;z-index:2;margin-top:12px;font-size:11.5px}
+.foot-legal a{color:rgba(255,255,255,.7);text-decoration:underline;text-underline-offset:2px}
+html,body{margin:0;overflow-x:hidden}
+body{padding-bottom:0}
+footer{margin-bottom:0}
 </style>
 </head>
 <body>
@@ -373,16 +370,17 @@ main.e404main{min-height:60vh;display:flex;align-items:center;justify-content:ce
       <a href="https://t.me/printuniverse" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.1 18.6 19.3c-.25 1.1-.9 1.37-1.83.85l-5.05-3.72-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.14 9.36-8.46c.4-.36-.09-.56-.63-.2L5.87 12.87.9 11.31c-1.08-.34-1.1-1.08.22-1.6L20.5 3.02c.9-.33 1.69.2 1.4 1.08z"/></svg>Telegram</a>
     </span>
   </div>
+  <div class="wrap"><div class="foot-legal"><a href="privacy.html" data-i18n="foot.privacy">Политика конфиденциальности</a></div></div>
 </footer>
 <script>
 const I18N = {
-  ru: { 'foot.brand': '© 2026 <b>PrintUniverse</b> — студия 3D-печати · <span class="mono">printverse.uz · Ташкент</span>',  title: '404 — страница не пропечаталась | PrintUniverse', h1: 'Эта страница не пропечаталась',
+  ru: { 'foot.brand': '© 2026 <b>PrintUniverse</b> — студия 3D-печати · <span class="mono">printverse.uz · Ташкент</span>', 'foot.privacy': 'Политика конфиденциальности',  title: '404 — страница не пропечаталась | PrintUniverse', h1: 'Эта страница не пропечаталась',
     sub: 'Похоже, слой съехал — по этому адресу страницы нет. Проверьте адрес или вернитесь на главную.', btn: 'На главную',
     'nav.how': 'Как заказать', 'nav.about': 'О печати', 'nav.calc': 'Калькулятор', 'nav.materials': 'Материалы', 'nav.shop': 'Готовые модельки', 'nav.faq': 'Вопросы', 'nav.cta': 'Оставить заявку', 'burger': 'Открыть меню' },
-  uz: { 'foot.brand': '© 2026 <b>PrintUniverse</b> — 3D chop studiyasi · <span class="mono">printverse.uz · Toshkent</span>',  title: '404 — sahifa chop etilmagan | PrintUniverse', h1: 'Bu sahifa chop etilmagan',
+  uz: { 'foot.brand': '© 2026 <b>PrintUniverse</b> — 3D chop studiyasi · <span class="mono">printverse.uz · Toshkent</span>', 'foot.privacy': 'Maxfiylik siyosati',  title: '404 — sahifa chop etilmagan | PrintUniverse', h1: 'Bu sahifa chop etilmagan',
     sub: 'Ehtimol, qatlam sirishgan — bu manzilda sahifa yo‘q. Manzilni tekshiring yoki bosh sahifaga qayting.', btn: 'Bosh sahifa',
     'nav.how': 'Buyurtma berish', 'nav.about': 'Chop haqida', 'nav.calc': 'Kalkulyator', 'nav.materials': 'Materiallar', 'nav.shop': 'Tayyor modellalar', 'nav.faq': 'Savollar', 'nav.cta': 'Ariza qoldirish', 'burger': 'Menyuni ochish' },
-  en: { 'foot.brand': '© 2026 <b>PrintUniverse</b> — 3D printing studio · <span class="mono">printverse.uz · Tashkent</span>',  title: '404 — this page didn’t finish printing | PrintUniverse', h1: 'This page didn’t finish printing',
+  en: { 'foot.brand': '© 2026 <b>PrintUniverse</b> — 3D printing studio · <span class="mono">printverse.uz · Tashkent</span>', 'foot.privacy': 'Privacy policy',  title: '404 — this page didn’t finish printing | PrintUniverse', h1: 'This page didn’t finish printing',
     sub: 'Looks like a layer shifted — there is no page at this address. Check the URL or head back home.', btn: 'Home',
     'nav.how': 'How to order', 'nav.about': 'About printing', 'nav.calc': 'Calculator', 'nav.materials': 'Materials', 'nav.shop': 'Ready-made models', 'nav.faq': 'FAQ', 'nav.cta': 'Leave a request', 'burger': 'Open menu' }
 };

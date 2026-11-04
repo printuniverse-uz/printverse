@@ -24,14 +24,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap&subset=cyrillic" rel="stylesheet">
 <style>
 /* ── ФИРМЕННЫЕ ШРИФТЫ ── */
-@font-face{
-  font-family:'Aristotelica Pro';
-  src:url('fonts/AristotelicaPro.woff2') format('woff2'),
-      url('fonts/AristotelicaPro.woff') format('woff');
-  font-weight:400 800;
-  font-style:normal;
-  font-display:swap;
-}
 /* ── ПАЛИТРА (акцент страницы — ментол Flexi) ── */
 :root{
   --carbon:#ffffff;
@@ -196,18 +188,14 @@ footer a{color:#fff;text-decoration:none}
 .gridfx.on{opacity:1;transition:opacity .16s ease}
 @media(prefers-reduced-motion:reduce){.gridfx{display:none}}
 #nl-badge-frame,#nl-hud-frame,.nl-wrap{display:none!important;visibility:hidden!important}
+
+.foot-legal{position:relative;z-index:2;margin-top:12px;font-size:11.5px}
+.foot-legal a{color:rgba(255,255,255,.7);text-decoration:underline;text-underline-offset:2px}
+html,body{margin:0}
+footer{margin-bottom:0}
+html,body{overflow-x:hidden}
+body{padding-bottom:0}
 </style>
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "Product",
- "name": "Flexi Pets",
- "description": "Подвижные зверюшки, напечатанные целиком: коллекция, рандомные и кастомизируемые зверюшки, брелоки и магниты. Бренд PrintUniverse; софт и дизайн — CuteFlexiMaker (Valeria Momo & Mattia).",
- "image": "https://printverse.uz/og-cover.png",
- "url": "https://printverse.uz/flexi-pets.html",
- "brand": { "@type": "Brand", "name": "PrintUniverse" }
-}
-</script>
 </head>
 <body>
 <div class="gridfx" id="gridFX" aria-hidden="true"></div>
@@ -324,6 +312,7 @@ footer a{color:#fff;text-decoration:none}
       <a href="https://t.me/printuniverse" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.1 18.6 19.3c-.25 1.1-.9 1.37-1.83.85l-5.05-3.72-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.14 9.36-8.46c.4-.36-.09-.56-.63-.2L5.87 12.87.9 11.31c-1.08-.34-1.1-1.08.22-1.6L20.5 3.02c.9-.33 1.69.2 1.4 1.08z"/></svg>Telegram</a>
     </span>
   </div>
+  <div class="wrap"><div class="foot-legal"><a href="privacy.html" data-i18n="foot.privacy">Политика конфиденциальности</a></div></div>
 </footer>
 
 <script>
@@ -371,6 +360,7 @@ const I18N = {
   "fx.btnuzum": "Смотреть на Uzum",
   "fx.btntg": "Написать в Telegram",
   "foot.brand": "© 2026 <b>PrintUniverse</b> — студия 3D-печати · <span class=\"mono\">printverse.uz · Ташкент</span>",
+  "foot.privacy": "Политика конфиденциальности",
   "fx.b6t": "Безопасность",
   "fx.b6d": "Отсутствие мелких съёмных деталей снижает риск того, что ребёнок проглотит элемент игрушки."
  },
@@ -407,6 +397,7 @@ const I18N = {
   "fx.btnuzum": "Uzum’da ko‘rish",
   "fx.btntg": "Telegramda yozish",
   "foot.brand": "© 2026 <b>PrintUniverse</b> — 3D chop studiyasi · <span class=\"mono\">printverse.uz · Toshkent</span>",
+  "foot.privacy": "Maxfiylik siyosati",
   "fx.b6t": "Xavfsizlik",
   "fx.b6d": "Mayda olinadigan detallarning yo‘qligi bolaning o‘yinchoq elementini yutib yuborish xavfini kamaytiradi."
  },
@@ -443,6 +434,7 @@ const I18N = {
   "fx.btnuzum": "View on Uzum",
   "fx.btntg": "Write on Telegram",
   "foot.brand": "© 2026 <b>PrintUniverse</b> — 3D printing studio · <span class=\"mono\">printverse.uz · Tashkent</span>",
+  "foot.privacy": "Privacy policy",
   "fx.b6t": "Safety",
   "fx.b6d": "No small detachable parts — the risk of a child swallowing a piece of the toy is reduced."
  }

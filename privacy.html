@@ -16,14 +16,6 @@
    файл (woff2) в папку fonts/ рядом с index.html на хостинге:
    fonts/AristotelicaPro.woff2. Пока файла нет, заголовки показываются
    дополнительным шрифтом Manrope. */
-@font-face{
-  font-family:'Aristotelica Pro';
-  src:url('fonts/AristotelicaPro.woff2') format('woff2'),
-      url('fonts/AristotelicaPro.woff') format('woff');
-  font-weight:400 800;
-  font-style:normal;
-  font-display:swap;
-}
 /* ── ПАЛИТРА ── */
 :root{
   --carbon:#ffffff;      /* фон страницы */
@@ -284,6 +276,9 @@ footer a{color:#fff;text-decoration:none}
  background-size:34px 34px,34px 34px}
 .gridfx.on{opacity:1;transition:opacity .16s ease}
 @media(prefers-reduced-motion:reduce){.gridfx{display:none}}
+html,body{margin:0;overflow-x:hidden}
+body{padding-bottom:0}
+footer{margin-bottom:0}
 </style>
 <style>
 
@@ -339,7 +334,7 @@ footer a{color:#fff;text-decoration:none}
   <div class="wrap policy">
     <div class="eyebrow" data-i18n="p.eyebrow">Документы</div>
     <h1 data-i18n="p.h1">Политика конфиденциальности</h1>
-    <p class="meta" data-i18n="p.meta">Редакция от 21 сентября 2026 · PrintUniverse · printverse.uz</p>
+    <p class="meta" data-i18n="p.meta">Редакция от 4 ноября 2026 · PrintUniverse · printverse.uz</p>
 
     <h2 data-i18n="p.s1h">1. Общие положения</h2>
     <p data-i18n-html="p.s1">Настоящая политика описывает, как студия 3D-печати PrintUniverse (далее — «мы», «PrintUniverse») обрабатывает персональные данные посетителей сайта <b>printverse.uz</b> и клиентов. Обработка осуществляется в соответствии с Законом Республики Узбекистан «О персональных данных» № ЗРУ-547 от 2 июля 2019 года.</p>
@@ -370,8 +365,14 @@ footer a{color:#fff;text-decoration:none}
     <h2 data-i18n="p.s8h">8. Ваши права</h2>
     <p data-i18n-html="p.s8">Вы вправе: получить информацию об обработке ваших данных, потребовать уточнения или удаления данных, отозвать согласие на обработку. Для этого напишите на <a href="mailto:printuniverse.box@gmail.com">printuniverse.box@gmail.com</a> или в <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener">Telegram</a> — ответим в течение 10 рабочих дней.</p>
 
-    <h2 data-i18n="p.s9h">9. Изменения политики</h2>
-    <p data-i18n-html="p.s9">Мы можем обновлять эту политику; актуальная редакция всегда доступна на этой странице.</p>
+    <h2 data-i18n="p.s9h">9. Печать и лицензии</h2>
+    <p data-i18n-html="p.s9a">PrintUniverse выполняет исключительно услуги 3D-печати: мы тратим материал и время, используем свои знания и оборудование, чтобы изготовить физическое изделие по заявке заказчика. Ответственность за заказ, включая правомерность печати выбранной модели, несёт заказчик.</p>
+    <p data-i18n-html="p.s9b">Мы не распространяем и не передаём электронные копии моделей (STL, OBJ, 3MF и другие форматы). Результат нашей работы — только физическое изделие, переданное заказчику.</p>
+    <p data-i18n-html="p.s9c">MakerWorld, Cults3D, Printables и подобные площадки — маркетплейсы, где авторы публикуют 3D-модели; у каждой площадки свои правила, у каждой модели — своя лицензия (CC BY, CC BY-NC и подобные). Отправляя заявку, заказчик принимает на себя ответственность за соблюдение этих правил и лицензий; мы не консультируем по правовому статусу моделей и вправе отказать в заказе, нарушающем закон.</p>
+    <p data-i18n-html="p.s9d">Для продажи готовых изделий, в том числе на маркетплейсе Uzum, мы приобретаем коммерческие лицензии у авторов моделей.</p>
+    <h2 data-i18n="p.s10h">10. Изменения политики</h2>
+    <p data-i18n-html="p.s10">Мы можем обновлять эту политику; актуальная редакция всегда доступна на этой странице.</p>
+
 
     <p class="backlink"><a href="/" class="btn btn-primary" data-i18n="p.back">← На главную</a></p>
   </div>
@@ -402,93 +403,132 @@ mMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
 }));
 
 const I18N = {
-ru: { 'nav.about': 'О печати',
-  'nav.how': 'Как заказать', 'nav.calc': 'Калькулятор', 'nav.materials': 'Материалы', 'nav.shop': 'Готовые модельки', 'nav.faq': 'Вопросы', 'nav.cta': 'Оставить заявку', 'burger': 'Открыть меню', 'p.eyebrow': 'Документы',
-  'meta.title': 'Политика конфиденциальности — PrintUniverse',
-  'p.h1': 'Политика конфиденциальности',
-  'p.meta': 'Редакция от 21 сентября 2026 · PrintUniverse · printverse.uz',
-  'p.s1h': '1. Общие положения',
-  'p.s1': 'Настоящая политика описывает, как студия 3D-печати PrintUniverse (далее — «мы», «PrintUniverse») обрабатывает персональные данные посетителей сайта <b>printverse.uz</b> и клиентов. Обработка осуществляется в соответствии с Законом Республики Узбекистан «О персональных данных» № ЗРУ-547 от 2 июля 2019 года.',
-  'p.s2h': '2. Кто обрабатывает данные',
-  'p.s2': 'Студия 3D-печати PrintUniverse, г. Ташкент, Республика Узбекистан.<br>Связь по всем вопросам о персональных данных: <a href="mailto:printuniverse.box@gmail.com">printuniverse.box@gmail.com</a>, <a href="tel:+998777374320">+998 77 737-43-20</a>, <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener">Telegram</a>.',
-  'p.s3h': '3. Какие данные мы получаем',
-  'p.s3a': '<b>Через форму заявки на сайте:</b> имя, телефон или Telegram, ссылка на модельку (MakerWorld, Cults3D и другие площадки), описание задачи — размер, цвет, материал.',
-  'p.s3b': '<b>При переписке и звонках:</b> контактные данные и содержание общения в Telegram, Instagram, по почте или телефону.',
-  'p.s3c': '<b>Файлы 3D-моделей:</b> калькулятор на сайте обрабатывает ваши файлы STL, OBJ и 3MF <b>локально в браузере — модели не отправляются на сервер и нам не видны</b>. Мы получаем файл только если вы сами прикладываете его к заявке или письму.',
-  'p.s3d': '<b>Заказы на маркетплейсе Uzum:</b> при покупке готовых изделий на Uzum часть данных (имя, адрес, телефон) обрабатывает также маркетплейс — применяется его собственная политика.',
-  'p.s3e': '<b>Технические данные:</b> при открытии сайта ваш IP-адрес и данные браузера технически передаются хостинг-провайдеру и сервису шрифтов (Google Fonts). Трекинговые cookie сайт не использует; если подключим аналитику — обновим эту политику.',
-  'p.s4h': '4. Цели обработки',
-  'p.s4': 'Данные используются только для: связи с вами по заявке, уточнения параметров печати (размер, цвет, материал), исполнения и доставки заказа, а при сотрудничестве с авторами моделей — оформления лицензий и связи по этому поводу. Мы не используем данные для рассылок без вашего согласия и не продаём их.',
-  'p.s5h': '5. Основание обработки',
-  'p.s5': 'Ваше согласие, которое вы даёте, нажимая кнопку «Отправить заявку» (согласие можно отозвать в любой момент), а также заключение и исполнение договора на оказание услуг печати.',
-  'p.s6h': '6. Передача третьим лицам',
-  'p.s6': 'Данные передаются только в объёме, необходимом для исполнения заказа: курьерской службе доставки (имя, телефон и адрес получателя — для отправки) и маркетплейсу Uzum в части заказов, оформленных на нём. Иных передач нет, если это прямо не предписано законом Республики Узбекистан.',
-  'p.s7h': '7. Хранение и защита',
-  'p.s7': 'Данные хранятся не дольше, чем этого требуют цели обработки, и удаляются по вашему запросу. Доступ к переписке и заявкам имеет ограниченный круг лиц — сотрудники PrintUniverse, непосредственно работающие с заказами.',
-  'p.s8h': '8. Ваши права',
-  'p.s8': 'Вы вправе: получить информацию об обработке ваших данных, потребовать уточнения или удаления данных, отозвать согласие на обработку. Для этого напишите на <a href="mailto:printuniverse.box@gmail.com">printuniverse.box@gmail.com</a> или в <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener">Telegram</a> — ответим в течение 10 рабочих дней.',
-  'p.s9h': '9. Изменения политики',
-  'p.s9': 'Мы можем обновлять эту политику; актуальная редакция всегда доступна на этой странице.',
-  'p.back': '← На главную',
-},
-uz: { 'nav.about': 'Chop haqida',
-  'nav.how': 'Buyurtma berish', 'nav.calc': 'Kalkulyator', 'nav.materials': 'Materiallar', 'nav.shop': 'Tayyor modellalar', 'nav.faq': 'Savollar', 'nav.cta': 'Ariza qoldirish', 'burger': 'Menyuni ochish', 'p.eyebrow': 'Hujjatlar',
-  'meta.title': 'Maxfiylik siyosati — PrintUniverse',
-  'p.h1': 'Maxfiylik siyosati',
-  'p.meta': 'Tahrir: 2026-yil 21-sentabr · PrintUniverse · printverse.uz',
-  'p.s1h': '1. Umumiy qoidalar',
-  'p.s1': 'Ushbu siyosat PrintUniverse 3D chop studiyasining (keyinroq — “biz”) printverse.uz sayti tashrif buyuruvchilari va mijozlarining shaxsiy ma’lumotlarini qanday qayta ishlashini tavsiflaydi. Qayta ishlash O‘zbekiston Respublikasining “Shaxsiy ma’lumotlar to‘g‘risida”gi qonuni (ZRU-547, 02.07.2019-yil) muvofiq amalga oshiriladi.',
-  'p.s2h': '2. Ma’lumotlarni kim qayta ishlaydi',
-  'p.s2': 'PrintUniverse 3D chop studiyasi, Toshkent sh., O‘zbekiston Respublikasi.<br>Shaxsiy ma’lumotlar bo‘yicha barcha savollar uchun aloqa: <a href="mailto:printuniverse.box@gmail.com">printuniverse.box@gmail.com</a>, <a href="tel:+998777374320">+998 77 737-43-20</a>, <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener">Telegram</a>.',
-  'p.s3h': '3. Qanday ma’lumotlarni olamiz',
-  'p.s3a': '<b>Saytdagi ariza formasi orqali:</b> ism, telefon yoki Telegram, model havolasi (MakerWorld, Cults3D va boshqalar), vazifa tavsifi — o‘lcham, rang, material.',
-  'p.s3b': '<b>Suhbat va qo‘ng‘iroqlarda:</b> aloqa ma’lumotlari va Telegram, Instagram, elektron pochta yoki telefondagi muloqot mazmuni.',
-  'p.s3c': '<b>3D model fayllari:</b> saytdagi kalkulyator STL, OBJ va 3MF fayllaringizni <b>mahalliy brauzerda qayta ishlaydi — modellar serverga yuborilmaydi va bizga ko‘rinmaydi</b>. Faylni faqat siz o‘zingiz arizaga yoki xatga ilova qilsangiz olamiz.',
-  'p.s3d': '<b>Uzum marketpleysidagi buyurtmalar:</b> Uzum’da tayyor mahsulot sotib olganda ma’lumotlarning bir qismini (ism, manzil, telefon) marketpleys ham o‘z siyosatiga muvofiq qayta ishlaydi.',
-  'p.s3e': '<b>Texnik ma’lumotlar:</b> sayt ochilganda IP-manzilingiz va brauzer ma’lumotlari texnik jihatdan xosting-provayderga va shrift servisiga (Google Fonts) uzatiladi. Sayt treking-cookie’lardan foydalanmaydi; analitika ulansa — siyosatni yangilaymiz.',
-  'p.s4h': '4. Qayta ishlash maqsadlari',
-  'p.s4': 'Ma’lumotlar faqat quyidagi maqsadlarda: ariza bo‘yicha aloqa, chop etish parametrlarini kelishish (o‘lcham, rang, material), buyurtmani bajarish va yetkazish, model mualliflari bilan hamkorlikda litsenziyalarni rasmiylashtirish. Ma’lumotlardan roziligingizsiz yuborishlar uchun foydalanmaymiz va ularni hech kimga sotmaymiz.',
-  'p.s5h': '5. Qayta ishlash asosi',
-  'p.s5': '“Arizani yuborish” tugmasini bosish orqali bergan roziligingiz (uni istalgan vaqtda qaytarib olishingiz mumkin), shuningdek chop etish xizmatlari shartnomasini tuzish va bajarish.',
-  'p.s6h': '6. Uchinchi shaxslarga uzatish',
-  'p.s6': 'Ma’lumotlar faqat buyurtmani bajarish uchun zarur bo‘lgan hajmda uzatiladi: kuryer xizmatiga (yetkazish uchun qabul qiluvchining ismi, telefon va manzili) va Uzum marketpleysiga — u yerda rasmiylashtirilgan buyurtmalar bo‘yicha. Boshqa uzatishlar yo‘q, agar O‘zbekiston Respublikasi qonuni to‘g‘ridan-to‘g‘ri talab qilmasa.',
-  'p.s7h': '7. Saqlash va himoya',
-  'p.s7': 'Ma’lumotlar qayta ishlash maqsadlari talab qilganidan uzoq saqlanmaydi va so‘rovingiz bo‘yicha o‘chiriladi. Yozishmalar va arizalarga buyurtmalar bilan bevosita ishlaydigan PrintUniverse xodimlarigina kiradi.',
-  'p.s8h': '8. Sizning huquqlaringiz',
-  'p.s8': 'Siz haqingizda: ma’lumotlaringiz qayta ishlanishi haqida ma’lumot olish, ularni tuzatish yoki o‘chirishni talab qilish, rozilikni qaytarib olish. Buning uchun <a href="mailto:printuniverse.box@gmail.com">printuniverse.box@gmail.com</a> yoki <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener">Telegram</a> orqali yozing — 10 ish kuni ichida javob beramiz.',
-  'p.s9h': '9. Siyosatga o‘zgartirishlar',
-  'p.s9': 'Siyosatni yangilashimiz mumkin; amaldagi tahrir doimo shu sahifada mavjud.',
-  'p.back': '← Bosh sahifaga',
-},
-en: { 'nav.about': 'About printing',
-  'nav.how': 'How to order', 'nav.calc': 'Calculator', 'nav.materials': 'Materials', 'nav.shop': 'Ready-made models', 'nav.faq': 'FAQ', 'nav.cta': 'Leave a request', 'burger': 'Open menu', 'p.eyebrow': 'Documents',
-  'meta.title': 'Privacy policy — PrintUniverse',
-  'p.h1': 'Privacy policy',
-  'p.meta': 'Edition of September 21, 2026 · PrintUniverse · printverse.uz',
-  'p.s1h': '1. General provisions',
-  'p.s1': 'This policy describes how the PrintUniverse 3D printing studio (“we”) processes the personal data of visitors of the printverse.uz website and its clients. Processing is carried out in accordance with the Law of the Republic of Uzbekistan “On Personal Data” No. ZRU-547 of July 2, 2019.',
-  'p.s2h': '2. Who processes the data',
-  'p.s2': 'PrintUniverse 3D printing studio, Tashkent, Republic of Uzbekistan.<br>Contact for all personal data matters: <a href="mailto:printuniverse.box@gmail.com">printuniverse.box@gmail.com</a>, <a href="tel:+998777374320">+998 77 737-43-20</a>, <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener">Telegram</a>.',
-  'p.s3h': '3. What data we receive',
-  'p.s3a': '<b>Via the request form on the website:</b> your name, phone or Telegram, link to the model (MakerWorld, Cults3D, etc.), task description — size, color, material.',
-  'p.s3b': '<b>In chats and calls:</b> contact details and the content of communication via Telegram, Instagram, email or phone.',
-  'p.s3c': '<b>3D model files:</b> the on-site calculator processes your STL, OBJ and 3MF files <b>locally in the browser — the models are not uploaded to a server and are not visible to us</b>. We only receive a file if you attach it to your request or email yourself.',
-  'p.s3d': '<b>Orders on the Uzum marketplace:</b> when you buy finished items on Uzum, some data (name, address, phone) is also processed by the marketplace under its own policy.',
-  'p.s3e': '<b>Technical data:</b> when you open the website, your IP address and browser data are technically transferred to the hosting provider and the font service (Google Fonts). The website does not use tracking cookies; if we add analytics, we will update this policy.',
-  'p.s4h': '4. Purposes of processing',
-  'p.s4': 'The data is used only to: contact you about your request, confirm printing parameters (size, color, material), fulfil and deliver the order, and — when working with model authors — arrange licenses and related communication. We do not use the data for mailings without your consent and never sell it.',
-  'p.s5h': '5. Legal basis',
-  'p.s5': 'Your consent given by clicking the “Send request” button (you may withdraw it at any time), as well as the conclusion and performance of the printing services contract.',
-  'p.s6h': '6. Transfer to third parties',
-  'p.s6': 'Data is transferred only to the extent necessary to fulfil the order: to the courier service (recipient name, phone and address for shipping) and to the Uzum marketplace for orders placed there. No other transfers are made unless required by the law of the Republic of Uzbekistan.',
-  'p.s7h': '7. Storage and protection',
-  'p.s7': 'Data is kept no longer than required for the purposes of processing and is deleted upon your request. Access to correspondence and requests is limited to PrintUniverse staff directly working with orders.',
-  'p.s8h': '8. Your rights',
-  'p.s8': 'You may: request information about the processing of your data, ask for its correction or deletion, and withdraw your consent. Write to <a href="mailto:printuniverse.box@gmail.com">printuniverse.box@gmail.com</a> or <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener">Telegram</a> — we will reply within 10 business days.',
-  'p.s9h': '9. Policy changes',
-  'p.s9': 'We may update this policy; the current version is always available on this page.',
-  'p.back': '← Back to home',
-},
+ "ru": {
+  "nav.about": "О печати",
+  "nav.how": "Как заказать",
+  "nav.calc": "Калькулятор",
+  "nav.materials": "Материалы",
+  "nav.shop": "Готовые модельки",
+  "nav.faq": "Вопросы",
+  "nav.cta": "Оставить заявку",
+  "burger": "Открыть меню",
+  "p.eyebrow": "Документы",
+  "meta.title": "Политика конфиденциальности — PrintUniverse",
+  "p.h1": "Политика конфиденциальности",
+  "p.meta": "Редакция от 21 сентября 2026 · PrintUniverse · printverse.uz",
+  "p.s1h": "1. Общие положения",
+  "p.s1": "Настоящая политика описывает, как студия 3D-печати PrintUniverse (далее — «мы», «PrintUniverse») обрабатывает персональные данные посетителей сайта <b>printverse.uz</b> и клиентов. Обработка осуществляется в соответствии с Законом Республики Узбекистан «О персональных данных» № ЗРУ-547 от 2 июля 2019 года.",
+  "p.s2h": "2. Кто обрабатывает данные",
+  "p.s2": "Студия 3D-печати PrintUniverse, г. Ташкент, Республика Узбекистан.<br>Связь по всем вопросам о персональных данных: <a href=\"mailto:printuniverse.box@gmail.com\">printuniverse.box@gmail.com</a>, <a href=\"tel:+998777374320\">+998 77 737-43-20</a>, <a href=\"https://t.me/printuniverse_support\" target=\"_blank\" rel=\"noopener\">Telegram</a>.",
+  "p.s3h": "3. Какие данные мы получаем",
+  "p.s3a": "<b>Через форму заявки на сайте:</b> имя, телефон или Telegram, ссылка на модельку (MakerWorld, Cults3D и другие площадки), описание задачи — размер, цвет, материал.",
+  "p.s3b": "<b>При переписке и звонках:</b> контактные данные и содержание общения в Telegram, Instagram, по почте или телефону.",
+  "p.s3c": "<b>Файлы 3D-моделей:</b> калькулятор на сайте обрабатывает ваши файлы STL, OBJ и 3MF <b>локально в браузере — модели не отправляются на сервер и нам не видны</b>. Мы получаем файл только если вы сами прикладываете его к заявке или письму.",
+  "p.s3d": "<b>Заказы на маркетплейсе Uzum:</b> при покупке готовых изделий на Uzum часть данных (имя, адрес, телефон) обрабатывает также маркетплейс — применяется его собственная политика.",
+  "p.s3e": "<b>Технические данные:</b> при открытии сайта ваш IP-адрес и данные браузера технически передаются хостинг-провайдеру и сервису шрифтов (Google Fonts). Трекинговые cookie сайт не использует; если подключим аналитику — обновим эту политику.",
+  "p.s4h": "4. Цели обработки",
+  "p.s4": "Данные используются только для: связи с вами по заявке, уточнения параметров печати (размер, цвет, материал), исполнения и доставки заказа, а при сотрудничестве с авторами моделей — оформления лицензий и связи по этому поводу. Мы не используем данные для рассылок без вашего согласия и не продаём их.",
+  "p.s5h": "5. Основание обработки",
+  "p.s5": "Ваше согласие, которое вы даёте, нажимая кнопку «Отправить заявку» (согласие можно отозвать в любой момент), а также заключение и исполнение договора на оказание услуг печати.",
+  "p.s6h": "6. Передача третьим лицам",
+  "p.s6": "Данные передаются только в объёме, необходимом для исполнения заказа: курьерской службе доставки (имя, телефон и адрес получателя — для отправки) и маркетплейсу Uzum в части заказов, оформленных на нём. Иных передач нет, если это прямо не предписано законом Республики Узбекистан.",
+  "p.s7h": "7. Хранение и защита",
+  "p.s7": "Данные хранятся не дольше, чем этого требуют цели обработки, и удаляются по вашему запросу. Доступ к переписке и заявкам имеет ограниченный круг лиц — сотрудники PrintUniverse, непосредственно работающие с заказами.",
+  "p.s8h": "8. Ваши права",
+  "p.s8": "Вы вправе: получить информацию об обработке ваших данных, потребовать уточнения или удаления данных, отозвать согласие на обработку. Для этого напишите на <a href=\"mailto:printuniverse.box@gmail.com\">printuniverse.box@gmail.com</a> или в <a href=\"https://t.me/printuniverse_support\" target=\"_blank\" rel=\"noopener\">Telegram</a> — ответим в течение 10 рабочих дней.",
+  "p.s10h": "10. Изменения политики",
+  "p.s10": "Мы можем обновлять эту политику; актуальная редакция всегда доступна на этой странице.",
+  "p.back": "← На главную",
+  "p.s9h": "9. Печать и лицензии",
+  "p.s9a": "PrintUniverse выполняет исключительно услуги 3D-печати: мы тратим материал и время, используем свои знания и оборудование, чтобы изготовить физическое изделие по заявке заказчика. Ответственность за заказ, включая правомерность печати выбранной модели, несёт заказчик.",
+  "p.s9b": "Мы не распространяем и не передаём электронные копии моделей (STL, OBJ, 3MF и другие форматы). Результат нашей работы — только физическое изделие, переданное заказчику.",
+  "p.s9c": "MakerWorld, Cults3D, Printables и подобные площадки — маркетплейсы, где авторы публикуют 3D-модели; у каждой площадки свои правила, у каждой модели — своя лицензия (CC BY, CC BY-NC и подобные). Отправляя заявку, заказчик принимает на себя ответственность за соблюдение этих правил и лицензий; мы не консультируем по правовому статусу моделей и вправе отказать в заказе, нарушающем закон.",
+  "p.s9d": "Для продажи готовых изделий, в том числе на маркетплейсе Uzum, мы приобретаем коммерческие лицензии у авторов моделей."
+ },
+ "uz": {
+  "nav.about": "Chop haqida",
+  "nav.how": "Buyurtma berish",
+  "nav.calc": "Kalkulyator",
+  "nav.materials": "Materiallar",
+  "nav.shop": "Tayyor modellalar",
+  "nav.faq": "Savollar",
+  "nav.cta": "Ariza qoldirish",
+  "burger": "Menyuni ochish",
+  "p.eyebrow": "Hujjatlar",
+  "meta.title": "Maxfiylik siyosati — PrintUniverse",
+  "p.h1": "Maxfiylik siyosati",
+  "p.meta": "Tahrir: 2026-yil 4-noyabr · PrintUniverse · printverse.uz",
+  "p.s1h": "1. Umumiy qoidalar",
+  "p.s1": "Ushbu siyosat PrintUniverse 3D chop studiyasining (keyinroq — “biz”) printverse.uz sayti tashrif buyuruvchilari va mijozlarining shaxsiy ma’lumotlarini qanday qayta ishlashini tavsiflaydi. Qayta ishlash O‘zbekiston Respublikasining “Shaxsiy ma’lumotlar to‘g‘risida”gi qonuni (ZRU-547, 02.07.2019-yil) muvofiq amalga oshiriladi.",
+  "p.s2h": "2. Ma’lumotlarni kim qayta ishlaydi",
+  "p.s2": "PrintUniverse 3D chop studiyasi, Toshkent sh., O‘zbekiston Respublikasi.<br>Shaxsiy ma’lumotlar bo‘yicha barcha savollar uchun aloqa: <a href=\"mailto:printuniverse.box@gmail.com\">printuniverse.box@gmail.com</a>, <a href=\"tel:+998777374320\">+998 77 737-43-20</a>, <a href=\"https://t.me/printuniverse_support\" target=\"_blank\" rel=\"noopener\">Telegram</a>.",
+  "p.s3h": "3. Qanday ma’lumotlarni olamiz",
+  "p.s3a": "<b>Saytdagi ariza formasi orqali:</b> ism, telefon yoki Telegram, model havolasi (MakerWorld, Cults3D va boshqalar), vazifa tavsifi — o‘lcham, rang, material.",
+  "p.s3b": "<b>Suhbat va qo‘ng‘iroqlarda:</b> aloqa ma’lumotlari va Telegram, Instagram, elektron pochta yoki telefondagi muloqot mazmuni.",
+  "p.s3c": "<b>3D model fayllari:</b> saytdagi kalkulyator STL, OBJ va 3MF fayllaringizni <b>mahalliy brauzerda qayta ishlaydi — modellar serverga yuborilmaydi va bizga ko‘rinmaydi</b>. Faylni faqat siz o‘zingiz arizaga yoki xatga ilova qilsangiz olamiz.",
+  "p.s3d": "<b>Uzum marketpleysidagi buyurtmalar:</b> Uzum’da tayyor mahsulot sotib olganda ma’lumotlarning bir qismini (ism, manzil, telefon) marketpleys ham o‘z siyosatiga muvofiq qayta ishlaydi.",
+  "p.s3e": "<b>Texnik ma’lumotlar:</b> sayt ochilganda IP-manzilingiz va brauzer ma’lumotlari texnik jihatdan xosting-provayderga va shrift servisiga (Google Fonts) uzatiladi. Sayt treking-cookie’lardan foydalanmaydi; analitika ulansa — siyosatni yangilaymiz.",
+  "p.s4h": "4. Qayta ishlash maqsadlari",
+  "p.s4": "Ma’lumotlar faqat quyidagi maqsadlarda: ariza bo‘yicha aloqa, chop etish parametrlarini kelishish (o‘lcham, rang, material), buyurtmani bajarish va yetkazish, model mualliflari bilan hamkorlikda litsenziyalarni rasmiylashtirish. Ma’lumotlardan roziligingizsiz yuborishlar uchun foydalanmaymiz va ularni hech kimga sotmaymiz.",
+  "p.s5h": "5. Qayta ishlash asosi",
+  "p.s5": "“Arizani yuborish” tugmasini bosish orqali bergan roziligingiz (uni istalgan vaqtda qaytarib olishingiz mumkin), shuningdek chop etish xizmatlari shartnomasini tuzish va bajarish.",
+  "p.s6h": "6. Uchinchi shaxslarga uzatish",
+  "p.s6": "Ma’lumotlar faqat buyurtmani bajarish uchun zarur bo‘lgan hajmda uzatiladi: kuryer xizmatiga (yetkazish uchun qabul qiluvchining ismi, telefon va manzili) va Uzum marketpleysiga — u yerda rasmiylashtirilgan buyurtmalar bo‘yicha. Boshqa uzatishlar yo‘q, agar O‘zbekiston Respublikasi qonuni to‘g‘ridan-to‘g‘ri talab qilmasa.",
+  "p.s7h": "7. Saqlash va himoya",
+  "p.s7": "Ma’lumotlar qayta ishlash maqsadlari talab qilganidan uzoq saqlanmaydi va so‘rovingiz bo‘yicha o‘chiriladi. Yozishmalar va arizalarga buyurtmalar bilan bevosita ishlaydigan PrintUniverse xodimlarigina kiradi.",
+  "p.s8h": "8. Sizning huquqlaringiz",
+  "p.s8": "Siz haqingizda: ma’lumotlaringiz qayta ishlanishi haqida ma’lumot olish, ularni tuzatish yoki o‘chirishni talab qilish, rozilikni qaytarib olish. Buning uchun <a href=\"mailto:printuniverse.box@gmail.com\">printuniverse.box@gmail.com</a> yoki <a href=\"https://t.me/printuniverse_support\" target=\"_blank\" rel=\"noopener\">Telegram</a> orqali yozing — 10 ish kuni ichida javob beramiz.",
+  "p.s10h": "10. Siyosatga o‘zgartirishlar",
+  "p.s10": "Siyosatni yangilashimiz mumkin; amaldagi tahrir doimo shu sahifada mavjud.",
+  "p.back": "← Bosh sahifaga",
+  "p.s9h": "9. Chop etish va litsenziyalar",
+  "p.s9a": "PrintUniverse faqat 3D chop etish xizmatlarini bajaradi: material va vaqt sarflaymiz, bilim va jihozlarimizdan foydalanib, buyurtmachi arizasi bo‘yicha jismoniy buyum yasaymiz. Buyurtma bo‘yicha javobgarlik, jumladan tanlangan modelni chop etish huquqiy tomonlari, buyurtmachiga tegishli.",
+  "p.s9b": "Modellarning elektron nusxalarini (STL, OBJ, 3MF va boshqa formatlar) tarqatmaymiz va hech kimga bermaymiz. Ishimiz natijasi — faqat buyurtmachiga topshiriladigan jismoniy buyum.",
+  "p.s9c": "MakerWorld, Cults3D, Printables va shunga o‘xshash platformalar — mualliflar 3D-modellari joylashadigan marketpleyslar; har bir platformaning qoidalari, har bir modelning esa o‘z litsenziyasi (CC BY, CC BY-NC va boshqalar) bor. Ariza yuborib, buyurtmachi bu qoidalar va litsenziyalarga rioy etish javobgarligini o‘z zimmasiga oladi; biz modellarning huquqiy maqomi bo‘yicha konsultatsiya bermaymiz va qonunni buzuvchi buyurtmani bajarishdan bosh tortamiz.",
+  "p.s9d": "Tayyor mahsulotlarni sotish uchun, jumladan Uzum marketpleysida, mualliflardan tijorat litsenziyalarini sotib olamiz."
+ },
+ "en": {
+  "nav.about": "About printing",
+  "nav.how": "How to order",
+  "nav.calc": "Calculator",
+  "nav.materials": "Materials",
+  "nav.shop": "Ready-made models",
+  "nav.faq": "FAQ",
+  "nav.cta": "Leave a request",
+  "burger": "Open menu",
+  "p.eyebrow": "Documents",
+  "meta.title": "Privacy policy — PrintUniverse",
+  "p.h1": "Privacy policy",
+  "p.meta": "Edition of November 4, 2026 · PrintUniverse · printverse.uz",
+  "p.s1h": "1. General provisions",
+  "p.s1": "This policy describes how the PrintUniverse 3D printing studio (“we”) processes the personal data of visitors of the printverse.uz website and its clients. Processing is carried out in accordance with the Law of the Republic of Uzbekistan “On Personal Data” No. ZRU-547 of July 2, 2019.",
+  "p.s2h": "2. Who processes the data",
+  "p.s2": "PrintUniverse 3D printing studio, Tashkent, Republic of Uzbekistan.<br>Contact for all personal data matters: <a href=\"mailto:printuniverse.box@gmail.com\">printuniverse.box@gmail.com</a>, <a href=\"tel:+998777374320\">+998 77 737-43-20</a>, <a href=\"https://t.me/printuniverse_support\" target=\"_blank\" rel=\"noopener\">Telegram</a>.",
+  "p.s3h": "3. What data we receive",
+  "p.s3a": "<b>Via the request form on the website:</b> your name, phone or Telegram, link to the model (MakerWorld, Cults3D, etc.), task description — size, color, material.",
+  "p.s3b": "<b>In chats and calls:</b> contact details and the content of communication via Telegram, Instagram, email or phone.",
+  "p.s3c": "<b>3D model files:</b> the on-site calculator processes your STL, OBJ and 3MF files <b>locally in the browser — the models are not uploaded to a server and are not visible to us</b>. We only receive a file if you attach it to your request or email yourself.",
+  "p.s3d": "<b>Orders on the Uzum marketplace:</b> when you buy finished items on Uzum, some data (name, address, phone) is also processed by the marketplace under its own policy.",
+  "p.s3e": "<b>Technical data:</b> when you open the website, your IP address and browser data are technically transferred to the hosting provider and the font service (Google Fonts). The website does not use tracking cookies; if we add analytics, we will update this policy.",
+  "p.s4h": "4. Purposes of processing",
+  "p.s4": "The data is used only to: contact you about your request, confirm printing parameters (size, color, material), fulfil and deliver the order, and — when working with model authors — arrange licenses and related communication. We do not use the data for mailings without your consent and never sell it.",
+  "p.s5h": "5. Legal basis",
+  "p.s5": "Your consent given by clicking the “Send request” button (you may withdraw it at any time), as well as the conclusion and performance of the printing services contract.",
+  "p.s6h": "6. Transfer to third parties",
+  "p.s6": "Data is transferred only to the extent necessary to fulfil the order: to the courier service (recipient name, phone and address for shipping) and to the Uzum marketplace for orders placed there. No other transfers are made unless required by the law of the Republic of Uzbekistan.",
+  "p.s7h": "7. Storage and protection",
+  "p.s7": "Data is kept no longer than required for the purposes of processing and is deleted upon your request. Access to correspondence and requests is limited to PrintUniverse staff directly working with orders.",
+  "p.s8h": "8. Your rights",
+  "p.s8": "You may: request information about the processing of your data, ask for its correction or deletion, and withdraw your consent. Write to <a href=\"mailto:printuniverse.box@gmail.com\">printuniverse.box@gmail.com</a> or <a href=\"https://t.me/printuniverse_support\" target=\"_blank\" rel=\"noopener\">Telegram</a> — we will reply within 10 business days.",
+  "p.s10h": "10. Policy changes",
+  "p.s10": "We may update this policy; the current version is always available on this page.",
+  "p.back": "← Back to home",
+  "p.s9h": "9. Printing and licenses",
+  "p.s9a": "PrintUniverse provides 3D printing services only: we spend material and time, apply our knowledge and equipment to produce a physical item per the customer request. Responsibility for the order, including the legality of printing the chosen model, lies with the customer.",
+  "p.s9b": "We do not distribute or share electronic copies of models (STL, OBJ, 3MF or other formats). The result of our work is only the physical item handed over to the customer.",
+  "p.s9c": "MakerWorld, Cults3D, Printables and similar platforms are marketplaces where authors publish 3D models; every platform has its own rules and every model its own license (CC BY, CC BY-NC and others). By sending a request, the customer assumes responsibility for complying with these rules and licenses; we do not advise on the legal status of models and may decline an order that violates the law.",
+  "p.s9d": "For selling finished items, including on the Uzum marketplace, we purchase commercial licenses from model authors."
+ }
 };
 let lang = 'ru';
 function t(k){ return (I18N[lang] && I18N[lang][k]) || I18N.ru[k] || k; }
