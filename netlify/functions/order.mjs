@@ -37,6 +37,19 @@ export default async (req) => {
   const contact = clip(d.contact).trim();
   if (!name || !contact) return json({ ok: false, error: "empty" }, 400);
 
+  // Белый список площадок: ссылку не с проверенного домена не пересылаем оператору
+  const ALLOW = ['makerworld.com', 'cults3d.com', 'printables.com', 'thingiverse.com',
+    'myminifactory.com', 'thangs.com', 'grabcad.com', 'github.com', 'gitlab.com',
+    'drive.google.com', 'docs.google.com', 'dropbox.com', 'disk.yandex.ru', 'yadi.sk',
+    'onedrive.live.com', '1drv.ms', 'box.com', 'wetransfer.com', 'mega.nz'];
+  if (d.link) {
+    let host = '';
+    try { host = new URL(String(d.link).trim()).hostname.toLowerCase(); }
+    catch { return json({ ok: false, error: "bad_link" }, 400); }
+    const ok = ALLOW.some(dom => host === dom || host.endsWith('.' + dom));
+    if (!ok) return json({ ok: false, error: "bad_link" }, 400);
+  }
+
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
   if (!token || !chatId) return json({ ok: false, error: "not_configured" }, 500);

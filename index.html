@@ -1139,6 +1139,16 @@ updatePrice();
 
 /* ── форма заявки: отправка в Telegram-бот через Netlify Function; если функции
    нет (например, локальный просмотр) — текст копируется в буфер обмена ── */
+const PU_ALLOW = ['makerworld.com', 'cults3d.com', 'printables.com', 'thingiverse.com',
+  'myminifactory.com', 'thangs.com', 'grabcad.com', 'github.com', 'gitlab.com',
+  'drive.google.com', 'docs.google.com', 'dropbox.com', 'disk.yandex.ru', 'yadi.sk',
+  'onedrive.live.com', '1drv.ms', 'box.com', 'wetransfer.com', 'mega.nz'];
+const isAllowedLink = v => {
+  try {
+    const h = new URL(v.trim()).hostname.toLowerCase();
+    return PU_ALLOW.some(d => h === d || h.endsWith('.' + d));
+  } catch { return false; }
+};
 document.getElementById('orderForm').addEventListener('submit', async e => {
   e.preventDefault();
   const btn = e.target.querySelector('button[type="submit"]');
@@ -1150,6 +1160,9 @@ document.getElementById('orderForm').addEventListener('submit', async e => {
   const tg = fTg.value.trim();
   if (tg && !/^@[A-Za-z][A-Za-z0-9_]{4,31}$/.test(tg)) {
     bad('form.tgBad'); fTg.focus(); return;
+  }
+  if (fLink.value.trim() && !isAllowedLink(fLink.value)) {
+    bad('form.linkBad'); fLink.focus(); return;
   }
   const model = state.modelName ? `${state.modelName} (${state.mat}, заполнение ${state.fill}%)` : '';
   const txt = `Заявка с сайта\nИмя: ${fName.value}\nТелефон: +998 ${fContact.value.trim()}` +
@@ -1165,6 +1178,7 @@ document.getElementById('orderForm').addEventListener('submit', async e => {
         company: document.getElementById('fCompany')?.value || '' })
     });
     if (r.ok) { status.innerHTML = t('form.sent'); return; }
+    try { const j = await r.json(); if (j && j.error === 'bad_link') { bad('form.linkBad'); if (btn) btn.disabled = false; return; } } catch (err) {}
   } catch (err) { /* функции нет — фолбэк */ }
   try { await navigator.clipboard.writeText(txt); } catch (err) {}
   status.innerHTML = t('form.fallback');
@@ -1288,6 +1302,7 @@ ru: {
   'order.p': 'Пришлите ссылку на модельку или просто опишите свою идею — что хотите получить, какой размер и цвет. Ответим и проконсультируем по всем деталям. Быстрее всего пишите сразу в <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener" style="color:#7cc4ea">Telegram</a> или <a href="https://www.instagram.com/printuniverse_uz" target="_blank" rel="noopener" style="color:#7cc4ea">Instagram</a>.',
   'ph.name': 'Как к вам обращаться', 'ph.contact': '(90) 123 45 67', 'ph.tg': 'Telegram — @username (необязательно)', 'ph.link': 'Ссылка на модельку — MakerWorld, Cults3D, Printables…', 'ph.desc': 'Размер, цвет, материал, количество — или задайте вопрос',
   'order.submit': 'Отправить заявку',
+  'form.linkBad': 'Эта площадка не поддерживается — пришлите файл в Telegram.',
   'order.note': 'Нажимая кнопку, вы соглашаетесь на обработку персональных данных. <a href="privacy.html">Политика конфиденциальности</a> (закон РУз «О персональных данных», ЗРУ-547 от 02.07.2019). Отправляя заявку, заказчик принимает на себя всю ответственность за заказ.',
   'foot.brand': '© 2026 <b>PrintUniverse</b> — студия 3D-печати · <span class="mono">printverse.uz · Ташкент</span>',
   'foot.privacy': 'Политика конфиденциальности',
@@ -1373,6 +1388,7 @@ uz: {
   'order.p': 'Model havolasini yuboring yoki g‘oyangizni yozib bering — nima kerakligini, o‘lchamini va rangini. Barcha tafsilotlar bo‘yicha javob beramiz va maslahat beramiz. Eng tez yo‘l: darhol <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener" style="color:#7cc4ea">Telegram</a> yoki <a href="https://www.instagram.com/printuniverse_uz" target="_blank" rel="noopener" style="color:#7cc4ea">Instagram</a> orqali yozing.',
   'ph.name': 'Ismingiz', 'ph.contact': '(90) 123 45 67', 'ph.tg': 'Telegram — @username (majburiy emas)', 'ph.link': 'Model havolasi — MakerWorld, Cults3D, Printables…', 'ph.desc': 'O‘lcham, rang, material, miqdor — yoki savol bering',
   'order.submit': 'Arizani yuborish',
+  'form.linkBad': 'Bu platforma qo‘llanmaydi — faylni Telegram orqali yuboring.',
   'order.note': 'Tugmani bosganingizda shaxsiy ma’lumotlarni qayta ishlashga rozilik bildirasiz. <a href="privacy.html">Maxfiylik siyosati</a> (O‘zR “Shaxsiy ma’lumotlar to‘g‘risida”gi qonuni, ZRU-547, 02.07.2019). Ariza yuborib, buyurtmachi buyurtma bo‘yicha barcha javobgarlikni o‘z zimmasiga oladi.',
   'foot.brand': '© 2026 <b>PrintUniverse</b> — 3D chop studiyasi · <span class="mono">printverse.uz · Toshkent</span>',
   'foot.privacy': 'Maxfiylik siyosati',
@@ -1458,6 +1474,7 @@ en: {
   'order.p': 'Send a link to a model or simply describe your idea — what you want, the size and the color. We will reply and advise on all the details. The fastest way is to write straight to <a href="https://t.me/printuniverse_support" target="_blank" rel="noopener" style="color:#7cc4ea">Telegram</a> or <a href="https://www.instagram.com/printuniverse_uz" target="_blank" rel="noopener" style="color:#7cc4ea">Instagram</a>.',
   'ph.name': 'Your name', 'ph.contact': '(90) 123 45 67', 'ph.tg': 'Telegram — @username (optional)', 'ph.link': 'Model link — MakerWorld, Cults3D, Printables…', 'ph.desc': 'Size, color, material, quantity — or ask a question',
   'order.submit': 'Send request',
+  'form.linkBad': 'This platform is not supported — send the file via Telegram.',
   'order.note': 'By clicking the button you consent to the processing of personal data. <a href="privacy.html">Privacy policy</a> (Law of Uzbekistan “On Personal Data”, ZRU-547 of 02.07.2019). By sending the request, the customer assumes full responsibility for the order.',
   'foot.brand': '© 2026 <b>PrintUniverse</b> — 3D printing studio · <span class="mono">printverse.uz · Tashkent</span>',
   'foot.privacy': 'Privacy policy',
